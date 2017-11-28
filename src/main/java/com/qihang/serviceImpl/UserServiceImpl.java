@@ -15,5 +15,6 @@ public class UserServiceImpl  implements UserService {
 
     public Teacher getInfo(String name) {
         return userTest.selectByLoginnameAndPassword(name);
+
     }
 }

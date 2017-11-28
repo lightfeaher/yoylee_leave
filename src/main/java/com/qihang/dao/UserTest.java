@@ -8,7 +8,7 @@ public interface UserTest {
 
     @Select("select * from user_teacher where name = #{name}" )
     Teacher selectByLoginnameAndPassword(
-            @Param("name") String loginname);
+            @Param("name") String name);
 
 
 }

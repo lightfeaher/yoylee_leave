@@ -18,6 +18,17 @@ public class Teacher {
         this.system = system;
     }
 
+    @Override
+    public String toString() {
+        return "Teacher{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", password='" + password + '\'' +
+                ", sex='" + sex + '\'' +
+                ", system='" + system + '\'' +
+                '}';
+    }
+
     public int getId() {
         return id;
     }

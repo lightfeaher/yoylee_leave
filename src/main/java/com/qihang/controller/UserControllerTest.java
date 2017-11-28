@@ -24,5 +24,4 @@ public class UserControllerTest {
         mv.setViewName("/test");
         return mv;
     }
-
 }
