@@ -5,7 +5,7 @@
     <title>Title</title>
 </head>
 <body>
-<h1>${requestScope.teacher.name}</h1>
-       test
+<h1>${requestScope.teacher}</h1>
+        test1
 </body>
 </html>

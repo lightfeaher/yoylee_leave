@@ -17,4 +17,8 @@ public class UserServiceImpl  implements UserService {
         return userTest.selectByLoginnameAndPassword(name);
 
     }
+    public int getInfo1(String name) {
+        return userTest.deleteByLoginnameAndPassword(name);
+
+    }
 }
