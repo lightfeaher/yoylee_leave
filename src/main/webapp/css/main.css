@@ -1,0 +1,144 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+html,
+body {
+    width: 100%;
+    font-size: 100%;
+    background: rgba(233, 231, 231, 1) !important;
+    position: relative;
+}
+
+/*总布局*/
+
+
+.nav {
+    width: 100%;
+    background: #F6F6F6;
+    position: fixed;
+}
+
+
+.right {
+    width: 85%;
+    float: left;
+    height: 100%;
+    margin-left: 15%;
+    z-index: 10;
+    position: fixed;
+}
+
+.main {
+    height: 100vh;
+    width: 100%;
+    z-index: 1;
+}
+
+.main0 {
+    width: 100%;
+    height: 130%;
+    padding-top: 16vh;
+    margin-right: 15%;
+}
+
+/*顶部导航栏.nav*/
+
+/*第一栏*/
+.top {
+    height: 11vh;
+    line-height: 10vh;
+    border-bottom: 1px solid rgb(215, 229, 231);
+
+}
+.top1 {
+    float: left;
+    height: 80%;
+    width: 50%;
+    margin-left: 3%;
+}
+
+.top1 > img {
+    height: 100%;
+    width: 100%;
+}
+
+.top2 {
+    margin-right: 5%;
+    float: right;
+    width: 20%;
+    text-align: right;
+    font-size: 1vw;
+}
+
+.top0 {
+    float: right;
+    width: 5%;
+    font-size: 1vw;
+}
+
+/*第一栏END*/
+
+/*顶部第二栏*/
+.nav2 {
+    width: 100%;
+    height: 5vh;
+    text-align:center;
+    background-color: #96B97D;
+}
+
+.nav2-0 {
+    cursor: pointer;
+    float: left;
+    height: 100%;
+    line-height: 5vh;
+    width: 10%;
+    font-size: 1.2vw;
+    color: #fff;
+
+}
+
+/*底部信息栏*/
+.bottom {
+    position: relative;
+    background: rgb(11, 73, 75);
+    bottom: 0;
+    clear: both;
+    color: #fff;
+    width: 100%;
+    height: 7vh;
+    line-height: 3vh;
+    padding-top: 1vh;
+    z-index: 10;
+    font-size: 0.8vw;
+
+}
+.bottom a{
+    color: #fff;
+}
+
+/*底部信息栏END*/
+.a {
+    height: 100%;
+    width: 100%;
+}
+
+/*js专用*/
+.change {
+    background: rgba(14, 13, 13, 0.72);
+    font-size: 1.2vw;
+}
+
+.none {
+    display: none;
+}
+
+.black {
+    display: block;
+}
+
+.nav-hover {
+    font-size: 1.3vw;
+    border-bottom: 5px solid rgb(230, 148, 52);
+}

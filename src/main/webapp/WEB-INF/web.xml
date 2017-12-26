@@ -33,12 +33,11 @@
       <param-name>encoding</param-name>
       <param-value>utf-8</param-value>
     </init-param>
-
+    <!--配置请求和响应都经过此编码过滤器-->
     <init-param>
       <param-name>forceRequestEncoding</param-name>
       <param-value>true</param-value>
     </init-param>
-
     <init-param>
       <param-name>forceResponseEncoding</param-name>
       <param-value>true</param-value>
