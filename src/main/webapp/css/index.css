@@ -49,21 +49,25 @@ input {
 .nav {
     position: absolute;
     border-radius: 10px;
-    background: rgba(255, 255, 255, 0.8);
-    box-shadow: 10px 10px 15px rgba(177, 171, 171, 0.7);
-    width: 25%;
-    height: 35%;
+    background-color: #010105;
+    filter: alpha(opacity=70);
+    opacity:0.7;
+    box-shadow: 10px 10px 15px #3e3b3b;
+    width: 30%;
+    height: 40%;
     margin-left: 35%;
     margin-top: 18%;
+    color: #fff;
+
 }
 
 .font1 {
     width: 100%;
-    height: 11%;
+    height: 20%;
     float: left;
-    font-size: 1vw;
+    font-size: 13px;
     text-align: center;
-    margin-top: 4%;
+    margin-top: 2%;
     border-bottom: 2px solid rgb(106, 128, 115);
     position: relative;
 }
@@ -87,15 +91,16 @@ input {
 }
 
 .input-1, .input-2 {
-    position: static;
+    color: #000;
+    position: relative;
     float: left;
     border-radius: 15px;
-    background: rgba(255, 255, 255, 0.9);/*rgba(17, 201, 250, 0.54)*/
-    font-size: 0.8vw;
+    background: rgba(255, 255, 255, 1);/*rgba(17, 201, 250, 0.54)*/
+    font-size: 15px;
     width: 75%;
     margin-left: 10%;
     margin-right: 10%;
-    margin-top: 5%;
+    margin-top: 3%;
     height: 10%;
     border: 0;
     padding-left: 5%;
@@ -105,7 +110,7 @@ input {
     float: left;
     border-radius: 15px;
     background: rgba(255, 255, 255, 0.9);/*rgba(17, 201, 250, 0.54)*/
-    font-size: 0.8vw;
+    font-size: 15px;
     width: 20%;
     margin-left: 10%;
     margin-right: 10%;
@@ -133,12 +138,13 @@ input {
     text-align: right;
     margin-right: 10%;
     margin-top: 3%;
+    color: #000000;
 }
 
 .div-2>a {
     float: right;
     width: 30%;
-    font-size: 1vw;
+    font-size: 30px;
     display: block;
 }
 
@@ -146,12 +152,13 @@ input {
     background: rgb(187, 122, 45);
     border: none;
     border-radius: 5px;
-    width: 35%;
+    width: 25%;
     float: left;
-    font-size: 1.2vw;
-    height: 13%;
+    font-size: 15px;
+    height: 15%;
     margin-top: 2%;
     margin-bottom: 2%;
+    margin-left: 2%;
 }
 
 .button-1 {
@@ -164,9 +171,17 @@ input {
     margin-right: 10%;
 }
 
+.lable_1{
+    margin: 5% 0 0 10%;
+}
+.lable_2{
+    margin: 0 0 0 10%;
+}
+
+
+
 @media only screen and (max-width:650px) {
     body {
-        background: url("../image/3.png");
         background-size: cover;
         background-repeat: no-repeat;
         height: 100%;
@@ -192,7 +207,7 @@ input {
         margin-top: 35%;
     }
     .font1>h2 {
-        font-size: 3em;
+        font-size: 20px;
     }
     .button-1, .button-2 {
         font-size: 0.8em;
@@ -207,7 +222,6 @@ input {
 
 @media only screen and (max-width:900px) and (min-width:651px) {
     body {
-        background: url("../image/3.png");
         background-size: cover;
         background-repeat: no-repeat;
         height: 100%;

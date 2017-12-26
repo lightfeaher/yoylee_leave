@@ -1,13 +1,13 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     <link rel="stylesheet" href="css/main.css">
-    <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+    <script src="http://cdn.bootcss.com/jquery/1.9.0/jquery.min.js"></script>
+    <%--<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>--%>
     <script type="text/javascript" src="js/main.js"></script>
     <title>动科请假系统首页</title>
 </head>
@@ -42,7 +42,7 @@
         <div class="nav2-0"  title="summarySheet">
             <center>请假汇总表</center>
         </div>
-        <div class="nav2-0"  title="passwordChange">
+        <div class="nav2-0 nav2-2"  title="passwordChange">
             <center>密码修改</center>
         </div>
      </div>
