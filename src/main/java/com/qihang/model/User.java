@@ -1,30 +1,29 @@
-package com.qihang.models;
+package com.qihang.model;
 
-public class Teacher {
-
+public class User {
     private int id;
     private String name;
     private String password;
-    private String sex;
+    private String right;
     private String system;
 
-    public Teacher() { }
+    public User(){}
 
-    public Teacher(int id, String name, String password, String sex, String system) {
+    public User(int id, String name, String password, String right, String system) {
         this.id = id;
         this.name = name;
         this.password = password;
-        this.sex = sex;
+        this.right = right;
         this.system = system;
     }
 
     @Override
     public String toString() {
-        return "Teacher{" +
+        return "User{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", password='" + password + '\'' +
-                ", sex='" + sex + '\'' +
+                ", right='" + right + '\'' +
                 ", system='" + system + '\'' +
                 '}';
     }
@@ -53,12 +52,12 @@ public class Teacher {
         this.password = password;
     }
 
-    public String getSex() {
-        return sex;
+    public String getRight() {
+        return right;
     }
 
-    public void setSex(String sex) {
-        this.sex = sex;
+    public void setRight(String right) {
+        this.right = right;
     }
 
     public String getSystem() {

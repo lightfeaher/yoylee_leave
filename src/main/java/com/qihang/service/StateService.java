@@ -1,5 +1,5 @@
 package com.qihang.service;
 
-public interface UserService {
+public interface StateService {
 
 }
