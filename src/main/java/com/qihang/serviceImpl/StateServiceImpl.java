@@ -1,10 +1,11 @@
 package com.qihang.serviceImpl;
 
+import com.qihang.service.StateService;
 import com.qihang.service.UserService;
 import org.springframework.stereotype.Service;
 
 
 @Service
-public class StateServiceImpl implements UserService {
+public class StateServiceImpl implements StateService {
 
 }

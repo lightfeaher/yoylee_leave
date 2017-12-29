@@ -18,6 +18,7 @@
                                 expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>
 
+
     <!-- Spring的配置文件，这里主要配置和业务逻辑有关的 -->
     <!--=================== 数据源，事务控制，xxx ================-->
     <!--<context:property-placeholder location="classpath:dbconfig.properties" />-->
