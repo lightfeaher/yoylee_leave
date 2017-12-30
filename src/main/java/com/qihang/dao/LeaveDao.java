@@ -11,7 +11,7 @@ import static com.qihang.util.TableConstants.TABLELEAVE;
 
 public interface LeaveDao {
 
-    //查
+    /*查*/
     @Select(value = "select * from "+TABLELEAVE)
 //    @Results({
 //            @Result(id = true, property = "id", column = "id"),
@@ -19,4 +19,9 @@ public interface LeaveDao {
 //    })
     List<Leave> SelectAllLeave();
 
+    /*增*/
+
+    /*删*/
+
+    /*改*/
 }

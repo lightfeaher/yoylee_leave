@@ -3,16 +3,25 @@
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
+
+    <!--配置mybaits驼峰名自动转换-->
+    <!--类:数据库字段is_man会自动映射到model对应类里面的isMan字段,不用配置resultmap去手动映射-->
     <settings>
         <setting name="mapUnderscoreToCamelCase" value="true"/>
     </settings>
 
+    <!--配置pagehelper插件-->
     <plugins>
         <plugin interceptor="com.github.pagehelper.PageInterceptor">
             <!--分页参数合理化  -->
             <property name="reasonable" value="true"/>
         </plugin>
     </plugins>
+
+    <!--配置别名,用于返回值创建-->
+    <!--<typeAliases>-->
+        <!--<typeAlias type="com.qihang.dao"></typeAlias>-->
+    <!--</typeAliases>-->
 
 </configuration>
 
