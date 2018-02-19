@@ -1,9 +1,8 @@
 package com.qihang.dao;
 
+import com.qihang.dao.provider.LeaveDynaSqlProvider;
 import com.qihang.model.Leave;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.Results;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -17,10 +16,15 @@ public interface LeaveDao {
 //            @Result(id = true, property = "id", column = "id"),
 //            @Result(property = "place", column = "place")
 //    })
-    List<Leave> SelectAllLeave();
+    List<Leave> selectAllLeave();
+
+    @SelectProvider(type = LeaveDynaSqlProvider.class,method = "selectLeaveByUser")
+    List<Leave> selectLeaveByUser(String name,int num);
 
     /*增*/
-
+    @Insert(value = "insert into "+TABLELEAVE+" values(null,#{leave.uTname},#{leave.uLname1},#{leave.uLname2},#{leave.leader1},#{leave.leader2},#{leave.place},#{leave.reason},#{leave.phone},#{leave.leaveTime},#{leave.subTime})")
+    @Options(useGeneratedKeys=true,keyProperty="leave.id")
+    int insertLeave(@Param("leave") Leave leave);
     /*删*/
 
     /*改*/

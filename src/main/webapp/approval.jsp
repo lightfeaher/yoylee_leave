@@ -1,9 +1,11 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <%--<script src="js/jquery-3.2.1.min.js"></script>--%>
-    <script src="http://cdn.bootcss.com/jquery/1.9.0/jquery.min.js"></script>
+    <script type="text/javascript" src="http://cdn.bootcss.com/jquery/1.9.0/jquery.min.js"></script>
+    <script type="text/javascript" src="js/jquery-3.0.0.js"></script>
     <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
     <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
@@ -36,81 +38,24 @@
                             </thead>
 
                             <tbody>
-                            <tr>
-                                <td>李老师1</td>
-                                <td>17.10.3</td>
-                                <td>北京</td>
-                                <td>188124123</td>
-                                <td>研讨会</td>
-                                <td>
-                                    <button class=" btn btn-primary">
-                                        <span class="glyphicon glyphicon-cog">批准</span>
-                                    </button>
-                                    <button class="btn btn-danger">
-                                        <span class="glyphicon glyphicon-cog" >不批准</span>
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>李老师1</td>
-                                <td>17.10.3</td>
-                                <td>北京</td>
-                                <td>188124123</td>
-                                <td>研讨会</td>
-                                <td>
-                                    <button class="btn btn-primary">
-                                        <span class="glyphicon glyphicon-cog">批准</span>
-                                    </button>
-                                    <button class="btn btn-danger">
-                                        <span class="glyphicon glyphicon-cog">不批准</span>
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>李老师1</td>
-                                <td>17.10.3</td>
-                                <td>北京</td>
-                                <td>188124123</td>
-                                <td>研讨会</td>
-                                <td>
-                                    <button class="btn btn-primary">
-                                        <span class="glyphicon glyphicon-cog">批准</span>
-                                    </button>
-                                    <button class="btn btn-danger">
-                                        <span class="glyphicon glyphicon-cog">不批准</span>
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>李老师1</td>
-                                <td>17.10.3</td>
-                                <td>北京</td>
-                                <td>188124123</td>
-                                <td>研讨会</td>
-                                <td>
-                                    <button class="btn btn-primary">
-                                        <span class="glyphicon glyphicon-cog">批准</span>
-                                    </button>
-                                    <button class="btn btn-danger">
-                                        <span class="glyphicon glyphicon-cog">不批准</span>
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>李老师1</td>
-                                <td>17.10.3</td>
-                                <td>北京</td>
-                                <td>188124123</td>
-                                <td>研讨会</td>
-                                <td>
-                                    <button class="btn btn-primary">
-                                        <span class="glyphicon glyphicon-cog">批准</span>
-                                    </button>
-                                    <button class="btn btn-danger">
-                                        <span class="glyphicon glyphicon-cog">不批准</span>
-                                    </button>
-                                </td>
-                            </tr>
+                            <c:forEach var="leave" items="${requestScope.leaves}">
+                                <tr>
+                                    <td>${leave.uTname}</td>
+                                    <td>${leave.leaveTime}</td>
+                                    <td>${leave.place}</td>
+                                    <td>${leave.phone}</td>
+                                    <td>${leave.reason}</td>
+                                    <td>
+                                        <button class=" btn btn-primary">
+                                            <span class="glyphicon glyphicon-cog">批准</span>
+                                        </button>
+                                        <button class="btn btn-danger">
+                                            <span class="glyphicon glyphicon-cog" >不批准</span>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </c:forEach>
+
                             </tbody>
                         </table>
 
@@ -123,21 +68,18 @@
     </div>
 </div>
 <script>
-    function subForm() {
+    $.ajax({
+        url:"getLeaveByUser",
+        type:"GET",
+        success:function (data) {
+            if (data.code == 200)
 
-        alert("提交成功!请联系相关领导批准!");
+        },
+        fail:function () {
+            alert("系统出现错误!")
+        }
+    })
 
-
-        /*$.ajax({
-            url: "tableView/exportRosterView",
-            type: "POST",
-            dataType: "html",
-            data: $("#huamingcefrom").serialize(),
-            success: function (data) {
-                $("#view").html(data);
-            }
-        });*/
-    }
 </script>
 </body>
 </html>

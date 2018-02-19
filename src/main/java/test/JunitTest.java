@@ -1,5 +1,6 @@
 package test;
 
+import com.qihang.model.Leave;
 import com.qihang.serviceImpl.LeaveServiceImpl;
 import com.qihang.serviceImpl.UserServiceImpl;
 import org.junit.Before;
@@ -8,6 +9,10 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import java.util.Date;
+import java.util.List;
+
 
 /*
 * 测试类
@@ -30,11 +35,20 @@ public class JunitTest {
     @Test
     public void testCURD(){
 
+        //测试根据user得到对象
+        List<Leave> leaves = leaveService.getLeaveByUser("3",1);
+        System.out.println(leaves);
+
+        //测试插入Leave对象
+//        Date sqlDate = new java.sql.Date(new Date().getTime());
+//        Leave leave = new Leave(5,"asf","1","2","1","1","23","wer","w","fw",sqlDate);
+//        System.out.println(leaveService.addLeave(leave));
         //测试根据条件得到姓名
-        String[] strings = userService.GetUserNameByRiSy(2,1);
-        for (String s :strings){
-            System.out.println(s);
-        }
+//        String[] strings = userService.getUserNameByRiSy(2,1);
+//        for (String s :strings){
+//            System.out.println(s);
+//        }
+//        System.out.println( new java.sql.Date(new Date().getTime()) );
 
 
         //测试demo

@@ -43,7 +43,7 @@
     <!-- 配置一个可以执行批量的sqlSession -->
     <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
         <constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"/>
-        <constructor-arg name="executorType" value="BATCH"/>
+        <!--<constructor-arg name="executorType" value="BATCH"/>-->
     </bean>
 
     <!-- mybatis:scan会扫描dao包里的所有接口当作Spring的bean配置，之后可以进行依赖注入-->

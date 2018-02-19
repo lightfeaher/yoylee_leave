@@ -1,24 +1,29 @@
 package com.qihang.model;
 
-import com.mysql.fabric.xmlrpc.base.Data;
+import java.util.Date;
 
 public class Leave {
     private int id;
-    private String tName;
-    private String lName1;
-    private String lName2;
+    private String uTname;
+    private String uLname1;
+    private String uLname2;
+    private String leader1;
+    private String leader2;
     private String place;
     private String reason;
     private String phone;
     private String leaveTime;
-    private Data subTime;
+    private Date subTime;
 
     public Leave(){}
-    public Leave(int id, String tName, String lName1, String lName2, String place, String reason, String phone, String leaveTime, Data subTime) {
+
+    public Leave(int id, String uTname, String uLname1, String uLname2, String leader1, String leader2, String place, String reason, String phone, String leaveTime, Date subTime) {
         this.id = id;
-        this.tName = tName;
-        this.lName1 = lName1;
-        this.lName2 = lName2;
+        this.uTname = uTname;
+        this.uLname1 = uLname1;
+        this.uLname2 = uLname2;
+        this.leader1 = leader1;
+        this.leader2 = leader2;
         this.place = place;
         this.reason = reason;
         this.phone = phone;
@@ -30,9 +35,11 @@ public class Leave {
     public String toString() {
         return "Leave{" +
                 "id=" + id +
-                ", tName='" + tName + '\'' +
-                ", lName1='" + lName1 + '\'' +
-                ", lName2='" + lName2 + '\'' +
+                ", uTname='" + uTname + '\'' +
+                ", uLname1='" + uLname1 + '\'' +
+                ", uLname2='" + uLname2 + '\'' +
+                ", leader1='" + leader1 + '\'' +
+                ", leader2='" + leader2 + '\'' +
                 ", place='" + place + '\'' +
                 ", reason='" + reason + '\'' +
                 ", phone='" + phone + '\'' +
@@ -49,28 +56,44 @@ public class Leave {
         this.id = id;
     }
 
-    public String gettName() {
-        return tName;
+    public String getuTname() {
+        return uTname;
     }
 
-    public void settName(String tName) {
-        this.tName = tName;
+    public void setuTname(String uTname) {
+        this.uTname = uTname;
     }
 
-    public String getlName1() {
-        return lName1;
+    public String getuLname1() {
+        return uLname1;
     }
 
-    public void setlName1(String lName1) {
-        this.lName1 = lName1;
+    public void setuLname1(String uLname1) {
+        this.uLname1 = uLname1;
     }
 
-    public String getlName2() {
-        return lName2;
+    public String getuLname2() {
+        return uLname2;
     }
 
-    public void setlName2(String lName2) {
-        this.lName2 = lName2;
+    public void setuLname2(String uLname2) {
+        this.uLname2 = uLname2;
+    }
+
+    public String getLeader1() {
+        return leader1;
+    }
+
+    public void setLeader1(String leader1) {
+        this.leader1 = leader1;
+    }
+
+    public String getLeader2() {
+        return leader2;
+    }
+
+    public void setLeader2(String leader2) {
+        this.leader2 = leader2;
     }
 
     public String getPlace() {
@@ -105,11 +128,11 @@ public class Leave {
         this.leaveTime = leaveTime;
     }
 
-    public Data getSubTime() {
+    public Date getSubTime() {
         return subTime;
     }
 
-    public void setSubTime(Data subTime) {
+    public void setSubTime(Date subTime) {
         this.subTime = subTime;
     }
 }

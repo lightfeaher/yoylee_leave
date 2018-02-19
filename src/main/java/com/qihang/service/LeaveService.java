@@ -6,6 +6,7 @@ import java.util.List;
 
 public interface LeaveService {
 
-    List<Leave> GetAllLeave();
-
+    List<Leave> getAllLeave();
+    int addLeave(Leave leave);
+    List<Leave> getLeaveByUser(String name,int num);
 }

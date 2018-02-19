@@ -28,7 +28,7 @@
         <div class="nav2-0 nav2-1 nav-hover" title="leave">
             <center>请假</center>
         </div>
-        <div class="nav2-0" title="approval">
+        <div class="nav2-0" title="getLeaveByUser">
             <center>批准</center>
         </div>
 

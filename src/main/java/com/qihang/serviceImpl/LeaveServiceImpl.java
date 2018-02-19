@@ -16,7 +16,15 @@ public class LeaveServiceImpl implements LeaveService {
     @Autowired
     LeaveDao leaveDao;
 
-    public List<Leave> GetAllLeave(){
-        return leaveDao.SelectAllLeave();
+    public List<Leave> getAllLeave(){
+        return leaveDao.selectAllLeave();
+    }
+
+    public int addLeave(Leave leave) {
+        return leaveDao.insertLeave(leave);
+    }
+
+    public List<Leave> getLeaveByUser(String name, int num) {
+        return leaveDao.selectLeaveByUser(name,num);
     }
 }
