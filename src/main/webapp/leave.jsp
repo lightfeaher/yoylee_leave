@@ -25,47 +25,56 @@
         </div>
         <div class="panel-body" style="padding: 0px 0px 0px 30px">
             <p><h4><b>注意:</b>请正确填写相关信息!提交的请假信息可在未批准时进行撤销!</h4></p>
+            <p><span class="span-sty">*出差时间格式: 2017.3.20-2017.11.5</span></p>
         </div>
         <div class="panel-body" style="padding: 10px 200px 10px 200px">
-            <div class="row">
-                <form id="huamingcefrom" method="post">
+            <div>
+                <form id="huamingcefrom" method="post" class="form-horizontal">
                     <div class="form-group">
-                        <label>姓名：</label>
-                        <input type="text" class="form-control" name="grade">
+                        <label class="input_wh">姓名：</label>
+                        <input type="text"  class="input_wh2"  name="grade">
+                        <span class="span-sty">*必填</span>
                     </div>
                     <div class="form-group">
-                        <label>出差时间：</label>
-                        <input type="text" class="form-control" name="grade">
+                        <label class="input_wh">出差时间：</label>
+                        <input type="text"  class="input_wh2"  name="grade">
+                        <span class="span-sty">*必填</span>
                     </div>
                     <div class="form-group">
-                        <label>出差地点：</label>
-                        <input type="text" class="form-control" name="klass">
+                        <label  class="input_wh">出差地点：</label>
+                        <input type="text" class="input_wh2" name="klass">
+                        <span class="span-sty">*必填</span>
                     </div>
                     <div class="form-group">
-                        <label>事由：</label>
-                        <textarea class="form-control" name="klass"></textarea>
+                        <label class="input_wh" >事由：</label>
+                        <textarea  name="klass" style="width: 300px;height: 40px"></textarea>
+                        <span class="span-sty">*必填</span>
                     </div>
                     <div class="form-group">
-                        <label>联系方式：</label>
-                        <input type="text" class="form-control" name="klass">
+                        <label class="input_wh">联系方式：</label>
+                        <input type="text" class="input_wh2"  name="klass">
+                        <span class="span-sty">*必填</span>
                     </div>
                     <div class="form-group">
-                        <label>选择中层领导：</label>
-                        <select class="form-control" name="major">
+                        <label  class="input_wh">选择中层领导：</label>
+                        <select  name="major">
                             <option value="020102">李老师</option>
                             <option value="110201">张老师</option>
                             <option value="110203">刘老师</option>
                         </select>
+                        <span class="span-sty">*必选</span>
                     </div>
                     <div class="form-group">
-                        <label>选择高层领导：</label>
-                        <select class="form-control" name="major">
+                        <label  class="input_wh">选择高层领导：</label>
+                        <select  name="major">
                             <option value="020102">李老师</option>
                             <option value="110201">张老师</option>
                             <option value="110203">刘老师</option>
                         </select>
+                        <span class="span-sty">*必选</span>
                     </div>
-                    <button type="button" class="btn btn-default" onclick="subForm()">提交</button>
+                    <button type="button" class="btn btn-primary" onclick="subForm()" style="margin-right: 30px">提交</button>
+                    <button type="reset" class="btn btn-warning">重置</button>
                 </form>
             </div>
         </div>

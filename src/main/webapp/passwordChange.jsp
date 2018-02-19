@@ -28,20 +28,20 @@
             <div class="row">
                 <form id="huamingcefrom" method="post">
                     <div class="form-group">
-                        <label>姓名：</label>
-                        <input type="text" class="form-control" name="grade">
+                        <label  class="input_wh">姓名：</label>
+                        <input type="text" class="input_wh2" name="grade">
                     </div>
                     <div class="form-group">
-                        <label>原密码：</label>
-                        <input type="password" class="form-control" name="grade">
+                        <label  class="input_wh">原密码：</label>
+                        <input type="password" class="input_wh2" name="grade">
                     </div>
                     <div class="form-group">
-                        <label>新密码：</label>
-                        <input type="password" class="form-control" name="klass">
+                        <label  class="input_wh">新密码：</label>
+                        <input type="password" class="input_wh2" name="klass">
                     </div>
                     <div class="form-group">
-                        <label>重复新密码：</label>
-                        <input type="password" class="form-control" name="klass">
+                        <label  class="input_wh">重复新密码：</label>
+                        <input type="password" class="input_wh2" name="klass">
                     </div>
                     <button type="button" class="btn btn-default" onclick="subForm()">修改</button>
                 </form>

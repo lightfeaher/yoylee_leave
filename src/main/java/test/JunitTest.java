@@ -1,14 +1,13 @@
 package test;
 
-import com.qihang.model.Leave;
 import com.qihang.serviceImpl.LeaveServiceImpl;
 import com.qihang.serviceImpl.UserServiceImpl;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import java.util.List;
 
 /*
 * 测试类
@@ -23,6 +22,10 @@ public class JunitTest {
     @Autowired
     UserServiceImpl userService;
 
+    @Before
+    public void init(){
+
+    }
     //测试方法
     @Test
     public void testCURD(){
