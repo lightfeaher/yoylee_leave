@@ -43,7 +43,7 @@
                         <label  class="input_wh">重复新密码：</label>
                         <input type="password" class="input_wh2" name="klass">
                     </div>
-                    <button type="button" class="btn btn-default" onclick="subForm()">修改</button>
+                    <button type="button" class="btn btn-primary" onclick="subForm()">修改</button>
                 </form>
             </div>
         </div>

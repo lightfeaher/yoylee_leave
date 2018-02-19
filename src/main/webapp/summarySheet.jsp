@@ -20,7 +20,13 @@
 <div class="container contain_style">
     <div class="panel panel-default">
         <div class="panel-heading"  style="padding: 5px 0 5px 20px">
-            <h4>请假信息汇总表：</h4>
+            <h5>请假信息汇总表：</h5>
+            <form action="" method="">
+                姓名:<input type="text" name="q-name">
+                出差地点:<input type="text" name="q-set">
+                事由:<input type="text" name="q-reason">
+                <input type="submit" value="查询">
+            </form>
         </div>
         <%--<div class="panel-body">
             <div class="row" style="margin-top: 20px;padding: 0 10px 0 10px">--%>
@@ -47,8 +53,8 @@
                         <td>188124123</td>
                         <td>研讨会</td>
                         <td>
-                            <button class="btn btn-primary">
-                                <span class="glyphicon glyphicon-list-alt">详情</span>
+                            <button class="btn-wh">   <%--模板样式--%>
+                                <span>详情</span>
                             </button>
                         </td>
                     </tr>

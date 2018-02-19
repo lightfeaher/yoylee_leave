@@ -19,3 +19,9 @@
     color: red;
     size: 15px;
 }
+.btn-wh{
+    width: 60px;
+    height: 24px;
+    color: white;
+    background-color: #00629f;
+}

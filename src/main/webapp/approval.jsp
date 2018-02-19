@@ -43,11 +43,11 @@
                                 <td>188124123</td>
                                 <td>研讨会</td>
                                 <td>
-                                    <button class="btn btn-primary">
+                                    <button class=" btn btn-primary">
                                         <span class="glyphicon glyphicon-cog">批准</span>
                                     </button>
                                     <button class="btn btn-danger">
-                                        <span class="glyphicon glyphicon-cog">不批准</span>
+                                        <span class="glyphicon glyphicon-cog" >不批准</span>
                                     </button>
                                 </td>
                             </tr>

@@ -26,7 +26,7 @@
         </div>
         <%--<div class="panel-body">
             <div class="row" style="padding: 0 10px 0 10px">--%>
-                <table class="table table-bordered table-hover">
+                <table class="table table-bordered table-hover" style="padding: 0 0 0 0">
                     <thead>
                     <tr>
                         <th>姓名</th>
