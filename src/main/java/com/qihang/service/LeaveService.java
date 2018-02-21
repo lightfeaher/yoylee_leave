@@ -6,7 +6,8 @@ import java.util.List;
 
 public interface LeaveService {
 
-    List<Leave> getAllLeave();
+    List<Leave> getAllLeave(String powerId,int sysId,int userId);
     int addLeave(Leave leave);
     List<Leave> getLeaveByUser(String name,int num);
+    int approveLeave(int leaveId,int numId,String powerId);
 }

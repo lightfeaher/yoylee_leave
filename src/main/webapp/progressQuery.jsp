@@ -1,3 +1,6 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -29,6 +32,7 @@
                 <table class="table table-bordered table-hover" style="padding: 0 0 0 0">
                     <thead>
                     <tr>
+                        <th>提交时间</th>
                         <th>姓名</th>
                         <th>出差时间</th>
                         <th>出差地点</th>
@@ -40,36 +44,20 @@
                     </thead>
 
                     <tbody>
-                    <tr>
-                        <td>李老师1</td>
-                        <td>17.10.3</td>
-                        <td>北京</td>
-                        <td>188124123</td>
-                        <td>研讨会</td>
-                        <td style="color: red"><b>已批准</b></td>
-                        <td style="color: red"><b>未批准</b></td>
-                    </tr>
-                    <tr>
-                        <td>李老师1</td>
-                        <td>17.10.3</td>
-                        <td>北京</td>
-                        <td>188124123</td>
-                        <td>研讨会</td>
-                        <td style="color: red"><b>已批准</b></td>
-                        <td style="color: red"><b>处理中</b></td>
-                    </tr>
-                    <tr>
-                        <td>李老师1</td>
-                        <td>17.10.3</td>
-                        <td>北京</td>
-                        <td>188124123</td>
-                        <td>研讨会</td>
-                        <td style="color: red"><b>处理中</b></td>
-                        <td style="color: red"><b>处理中</b></td>
-                    </tr>
+                    <c:forEach var="leave" items="${requestScope.leaves}">
+                        <tr>
+                            <td>${leave.subTime}</td>
+                            <td>${leave.uTname}</td>
+                            <td>${leave.leaveTime}</td>
+                            <td>${leave.place}</td>
+                            <td>${leave.phone}</td>
+                            <td>${leave.reason}</td>
+                            <td style="color: red"><b>${(leave.leader1) == 1?"处理中":(leave.leader1 == 2 ? "已批准":"未批准") }</b></td>
+                            <td style="color: red"><b>${(leave.leader2) == 1?"处理中":(leave.leader2 == 2 ? "已批准":"未批准") }</b></td>
+                        </tr>
+                    </c:forEach>
                     </tbody>
                 </table>
-
          <%--   </div>
         </div>--%>
     </div>
@@ -78,22 +66,5 @@
 
     </div>
 </div>
-<script>
-    function subForm() {
-
-        alert("提交成功!请联系相关领导批准!");
-
-
-        /*$.ajax({
-            url: "tableView/exportRosterView",
-            type: "POST",
-            dataType: "html",
-            data: $("#huamingcefrom").serialize(),
-            success: function (data) {
-                $("#view").html(data);
-            }
-        });*/
-    }
-</script>
 </body>
 </html>

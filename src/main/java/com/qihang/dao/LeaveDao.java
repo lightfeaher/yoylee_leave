@@ -11,21 +11,19 @@ import static com.qihang.util.TableConstants.TABLELEAVE;
 public interface LeaveDao {
 
     /*查*/
-    @Select(value = "select * from "+TABLELEAVE)
-//    @Results({
-//            @Result(id = true, property = "id", column = "id"),
-//            @Result(property = "place", column = "place")
-//    })
-    List<Leave> selectAllLeave();
+    @SelectProvider(type = LeaveDynaSqlProvider.class,method = "selectAllLeave")
+    List<Leave> selectAllLeave(String powerId,int sysId,int userId);
 
     @SelectProvider(type = LeaveDynaSqlProvider.class,method = "selectLeaveByUser")
     List<Leave> selectLeaveByUser(String name,int num);
 
     /*增*/
-    @Insert(value = "insert into "+TABLELEAVE+" values(null,#{leave.uTname},#{leave.uLname1},#{leave.uLname2},#{leave.leader1},#{leave.leader2},#{leave.place},#{leave.reason},#{leave.phone},#{leave.leaveTime},#{leave.subTime})")
+    @Insert(value = "insert into "+TABLELEAVE+" values(null,#{leave.uId},#{leave.uSys},#{leave.uTname},#{leave.uLname1},#{leave.uLname2},#{leave.leader1},#{leave.leader2},#{leave.place},#{leave.reason},#{leave.phone},#{leave.leaveTime},#{leave.subTime})")
     @Options(useGeneratedKeys=true,keyProperty="leave.id")
     int insertLeave(@Param("leave") Leave leave);
     /*删*/
 
     /*改*/
+    @UpdateProvider(type = LeaveDynaSqlProvider.class,method = "updateLeave")
+    int updateLeave(int leaveId,int numId,String powerId);
 }

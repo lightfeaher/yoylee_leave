@@ -40,16 +40,17 @@
                             <tbody>
                             <c:forEach var="leave" items="${requestScope.leaves}">
                                 <tr>
+                                    <td class="leaveId" hidden>${leave.id}</td>
                                     <td>${leave.uTname}</td>
                                     <td>${leave.leaveTime}</td>
                                     <td>${leave.place}</td>
                                     <td>${leave.phone}</td>
                                     <td>${leave.reason}</td>
                                     <td>
-                                        <button class=" btn btn-primary">
+                                        <button class=" btn btn-primary " leave_id = "${leave.id}" num_id = "1">
                                             <span class="glyphicon glyphicon-cog">批准</span>
                                         </button>
-                                        <button class="btn btn-danger">
+                                        <button class="btn btn-danger" leave_id = "${leave.id}" num_id="2">
                                             <span class="glyphicon glyphicon-cog" >不批准</span>
                                         </button>
                                     </td>
@@ -68,16 +69,25 @@
     </div>
 </div>
 <script>
-    $.ajax({
-        url:"getLeaveByUser",
-        type:"GET",
-        success:function (data) {
-            if (data.code == 200)
-
-        },
-        fail:function () {
-            alert("系统出现错误!")
-        }
+    $(".btn").click(function () {
+        var leaveId = $(this).attr("leave_id");
+        var numId = $(this).attr("num_id");
+        var thisBtn = $(this);
+        $.ajax({
+            url:"approveLeave",
+            type:"POST",
+            data:{"leaveId":leaveId,"numId":numId},
+            success:function (data) {
+                if (data.code == 200) {
+                    alert("操作成功!");
+                    thisBtn.parent().parent().remove();
+                }else
+                    alert("操作失败,请重新操作!");
+            },
+            fail:function() {
+                alert("系统出现错误!")
+            }
+        });
     })
 
 </script>

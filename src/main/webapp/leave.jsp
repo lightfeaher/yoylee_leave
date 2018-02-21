@@ -32,7 +32,7 @@
                 <form id="huamingcefrom" method="post" class="form-horizontal">
                     <div class="form-group">
                         <label class="input_wh">姓名：</label>
-                        <input type="text"  class="input_wh2"  name="t_name" id="name">
+                        <input type="text"  class="input_wh2"  name="uTname" id="name">
                         <span class="span-sty">*必填</span>
                     </div>
                     <div class="form-group">
@@ -57,7 +57,7 @@
                     </div>
                     <div class="form-group">
                         <label  class="input_wh">选择中层领导：</label>
-                        <select  name="l_name1" id="lName1">
+                        <select  name="uLname1" id="lName1">
                             <option value="1">李老师</option>
                             <option value="2">张老师</option>
                             <option value="3">刘老师</option>
@@ -66,8 +66,8 @@
                     </div>
                     <div class="form-group">
                         <label  class="input_wh">选择高层领导：</label>
-                        <select  name="l_name2" id="lName2">
-                            <option value="4">李老师</option>
+                        <select  name="uLname2" id="lName2">
+                            <option value="3">李老师</option>
                             <option value="5">张老师</option>
                             <option value="6">刘老师</option>
                         </select>
@@ -111,26 +111,27 @@
         else return true;
     }
     function subForm() {
-        $(".btn").attr({"disabled":"disabled"}).html("提交中..");
-        if (checkForm())
-        $.ajax({
-             url: "addLeave",
-             type: "POST",
-             data: $("#huamingcefrom").serialize(),
-             success: function (data) {
-                 if (data.code == 200){
-                     alert("提交请假信息成功!请联系相关领导批改!请勿重复提交!");
-                     $(":input").not("select").val("");  //清空请假信息
-                 }
-                 else
-                     alert("提交失败，请重新提交，如若不成功，请联系管理人员！")
-                 $(".btn-primary").removeAttr("disabled").html("提交");
-                 $(".btn-warning").removeAttr("disabled").html("重置");
-             },
-            fail:function () {
-                alert("提交失败，请重新提交，如若不成功，请联系管理人员！")
-            }
-         });
+        if (checkForm()) {
+            $(".btn").attr({"disabled": "disabled"}).html("提交中..");
+            $.ajax({
+                url: "addLeave",
+                type: "POST",
+                data: $("#huamingcefrom").serialize(),
+                success: function (data) {
+                    if (data.code == 200) {
+                        alert("提交请假信息成功!请联系相关领导批改!请勿重复提交!");
+                        $(":input").not("select").val("");  //清空请假信息
+                    }
+                    else
+                        alert("提交失败，请重新提交，如若不成功，请联系管理人员！")
+                    $(".btn-primary").removeAttr("disabled").html("提交");
+                    $(".btn-warning").removeAttr("disabled").html("重置");
+                },
+                fail: function () {
+                    alert("提交失败，请重新提交，如若不成功，请联系管理人员！")
+                }
+            });
+        }
     }
 </script>
 </body>

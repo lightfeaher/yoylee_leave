@@ -4,6 +4,8 @@ import java.util.Date;
 
 public class Leave {
     private int id;
+    private int uId;
+    private int uSys;
     private String uTname;
     private String uLname1;
     private String uLname2;
@@ -17,8 +19,10 @@ public class Leave {
 
     public Leave(){}
 
-    public Leave(int id, String uTname, String uLname1, String uLname2, String leader1, String leader2, String place, String reason, String phone, String leaveTime, Date subTime) {
+    public Leave(int id, int uId, int uSys, String uTname, String uLname1, String uLname2, String leader1, String leader2, String place, String reason, String phone, String leaveTime, Date subTime) {
         this.id = id;
+        this.uId = uId;
+        this.uSys = uSys;
         this.uTname = uTname;
         this.uLname1 = uLname1;
         this.uLname2 = uLname2;
@@ -35,6 +39,8 @@ public class Leave {
     public String toString() {
         return "Leave{" +
                 "id=" + id +
+                ", uId=" + uId +
+                ", uSys=" + uSys +
                 ", uTname='" + uTname + '\'' +
                 ", uLname1='" + uLname1 + '\'' +
                 ", uLname2='" + uLname2 + '\'' +
@@ -54,6 +60,22 @@ public class Leave {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getuId() {
+        return uId;
+    }
+
+    public void setuId(int uId) {
+        this.uId = uId;
+    }
+
+    public int getuSys() {
+        return uSys;
+    }
+
+    public void setuSys(int uSys) {
+        this.uSys = uSys;
     }
 
     public String getuTname() {

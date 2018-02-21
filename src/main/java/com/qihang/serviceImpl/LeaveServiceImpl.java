@@ -16,8 +16,8 @@ public class LeaveServiceImpl implements LeaveService {
     @Autowired
     LeaveDao leaveDao;
 
-    public List<Leave> getAllLeave(){
-        return leaveDao.selectAllLeave();
+    public List<Leave> getAllLeave(String powerId,int sysId,int userId){
+        return leaveDao.selectAllLeave(powerId,sysId,userId);
     }
 
     public int addLeave(Leave leave) {
@@ -26,5 +26,9 @@ public class LeaveServiceImpl implements LeaveService {
 
     public List<Leave> getLeaveByUser(String name, int num) {
         return leaveDao.selectLeaveByUser(name,num);
+    }
+
+    public int approveLeave(int leaveId, int numId, String powerId) {
+        return leaveDao.updateLeave(leaveId,numId,powerId);
     }
 }
