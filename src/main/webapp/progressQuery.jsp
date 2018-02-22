@@ -29,7 +29,7 @@
         </div>
         <%--<div class="panel-body">
             <div class="row" style="padding: 0 10px 0 10px">--%>
-                <table class="table table-bordered table-hover" style="padding: 0 0 0 0">
+                <table class="table table-bordered table-hover" id="leaveTable" style="padding: 0 0 0 0">
                     <thead>
                     <tr>
                         <th>提交时间</th>
@@ -65,6 +65,129 @@
     <div id="view">
 
     </div>
+    <!-- 显示分页信息 -->
+    <div class="row">
+        <!--分页文字信息  -->
+        <div class="col-md-6" id="page_info_area"></div>
+        <!-- 分页条信息 -->
+        <div class="col-md-6" id="page_nav_area"></div>
+    </div>
 </div>
+<script type="text/javascript">
+    $(function(){
+        //去首页
+        to_page(1);
+    });
+    function to_page(pn){
+        $.ajax({
+            url:"getPrivateLeave",
+            data:{"pn":pn},
+            type:"GET",
+            success:function(result){
+                //console.log(result);
+                //1、解析并显示毕业数据
+                build_leave_table(result);
+                //2、解析并显示分页信息
+                build_page_info(result);
+                //3、解析显示分页条数据
+                build_page_nav(result);
+            }
+        });
+    }
+    function build_leave_table(result){
+        //清空table表格
+        $("#leaveTable tbody").empty();
+        var leaves = result.jsondata.pageInfo.list;
+        $.each(leaves,function(index,item){
+            var subTime = $("<td></td>").append(item.subTime);
+            var uTname = $("<td></td>").append(item.uTname);
+            var leaveTime = $("<td></td>").append(item.leaveTime);
+            var place = $("<td></td>").append(item.place);
+            var phone = $("<td></td>").append(item.phone);
+            var reason = $("<td></td>").append(item.reason);
+            var zhong = $("<td style='color: red'></td>").append((item.leader1) == 1?"处理中":(item.leader1 == 2 ? "已批准":"未批准"));
+            var gao = $("<td style='color: red'></td>").append((item.leader2) == 1?"处理中":(item.leader2 == 2 ? "已批准":"未批准"));
+
+            //append方法执行完成以后还是返回原来的元素
+            $("<tr></tr>").append(subTime)
+                .append(uTname)
+                .append(leaveTime)
+                .append(place)
+                .append(phone)
+                .append(reason)
+                .append(zhong)
+                .append(gao)
+                .appendTo("#leaveTable tbody");
+        });
+    }
+
+
+    //解析显示分页信息
+    var totalRecord,currentPage;//保存总记录数和当前页码
+    function build_page_info(result){
+        $("#page_info_area").empty();
+        $("#page_info_area").append("当前"+result.jsondata.pageInfo.pageNum+"页,总"+
+            result.jsondata.pageInfo.pages+"页,总"+
+            result.jsondata.pageInfo.total+"条记录");
+        totalRecord = result.jsondata.pageInfo.total;
+        currentPage = result.jsondata.pageInfo.pageNum;
+    }
+
+    //解析显示分页条，点击分页要能去下一页....
+    function build_page_nav(result) {
+        //page_nav_area
+        $("#page_nav_area").empty();
+        var ul = $("<ul></ul>").addClass("pagination");
+
+        //构建元素
+        var firstPageLi = $("<li></li>").append($("<a></a>").append("首页").attr("href", "#"));
+        var prePageLi = $("<li></li>").append($("<a></a>").append("&laquo;"));
+        if (result.jsondata.pageInfo.hasPreviousPage === false) {//没有上一页将第一页和上一页设为不可用
+            firstPageLi.addClass("disabled");
+            prePageLi.addClass("disabled");
+        } else {
+            //为元素添加点击翻页的事件
+            firstPageLi.click(function () {
+                to_page(1);
+            });
+            prePageLi.click(function () {
+                to_page(result.extend.pageInfo.pageNum - 1);
+            });
+        }
+        var nextPageLi = $("<li></li>").append($("<a></a>").append("&raquo;"));
+        var lastPageLi = $("<li></li>").append($("<a></a>").append("末页").attr("href","#"));
+        if(result.jsondata.pageInfo.hasNextPage === false){//没有下一页
+            nextPageLi.addClass("disabled");
+            lastPageLi.addClass("disabled");
+        }else{
+            nextPageLi.click(function(){
+                to_page(result.jsondata.pageInfo.pageNum +1);
+            });
+            lastPageLi.click(function(){
+                to_page(result.jsondata.pageInfo.pages);
+            });
+        }
+
+        //添加首页和前一页 的提示
+        ul.append(firstPageLi).append(prePageLi);
+        //1,2，3遍历给ul中添加页码提示
+        $.each(result.jsondata.pageInfo.navigatepageNums,function(index,item){
+            var numLi = $("<li></li>").append($("<a></a>").append(item));
+            if(result.jsondata.pageInfo.pageNum === item){
+                numLi.addClass("active");
+            }
+            numLi.click(function(){
+                to_page(item);
+            });
+            ul.append(numLi);
+        });
+        //添加下一页和末页 的提示
+        ul.append(nextPageLi).append(lastPageLi);
+
+        //把ul加入到nav
+        var navEle = $("<nav></nav>").append(ul);
+        navEle.appendTo("#page_nav_area");
+    }
+</script>
 </body>
 </html>

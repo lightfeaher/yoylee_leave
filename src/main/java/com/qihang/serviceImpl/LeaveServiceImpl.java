@@ -31,4 +31,12 @@ public class LeaveServiceImpl implements LeaveService {
     public int approveLeave(int leaveId, int numId, String powerId) {
         return leaveDao.updateLeave(leaveId,numId,powerId);
     }
+
+    public List<Leave> getPrivateLeave(int uId) {
+        return leaveDao.selectPrivateLeave(uId);
+    }
+
+    public int removeLeave(int delId) {
+        return leaveDao.deleteLeave(delId);
+    }
 }

@@ -32,14 +32,14 @@
             <center>批准</center>
         </div>
 
-        <div class="nav2-0" title="getAllLeave?num=1">
+        <div class="nav2-0" title="progressQuery">
             <center>进度查询</center>
         </div>
 
-        <div class="nav2-0"  title="revoke">
+        <div class="nav2-0"  title="getPrivateLeave">
             <center>请假撤销</center>
         </div>
-        <div class="nav2-0"  title="summarySheet?num=2">
+        <div class="nav2-0"  title="summarySheet">
             <center>请假汇总表</center>
         </div>
         <div class="nav2-0 nav2-2"  title="passwordChange">

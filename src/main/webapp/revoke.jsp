@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -37,44 +38,20 @@
                     </thead>
 
                     <tbody>
-                    <tr>
-                        <td>李老师1</td>
-                        <td>17.10.3</td>
-                        <td>北京</td>
-                        <td>188124123</td>
-                        <td>研讨会</td>
-                        <td>
-                            <button class="btn btn-danger">
-                                <span class="glyphicon glyphicon-trash">撤销</span>
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>李老师1</td>
-                        <td>17.10.3</td>
-                        <td>北京</td>
-                        <td>188124123</td>
-                        <td>研讨会</td>
-                        <td>
-                            <button class="btn btn-danger">
-                                <span class="glyphicon glyphicon-trash">撤销</span>
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>李老师1</td>
-                        <td>17.10.3</td>
-                        <td>北京</td>
-                        <td>188124123</td>
-                        <td>研讨会</td>
-                        <td>
-                            <button class="btn btn-danger">
-                                <span class="glyphicon glyphicon-trash">撤销</span>
-                            </button>
-                        </td>
-                    </tr>
-
-
+                    <c:forEach var="leave" items="${requestScope.leaves}">
+                        <tr>
+                            <td>${leave.uTname}</td>
+                            <td>${leave.leaveTime}</td>
+                            <td>${leave.place}</td>
+                            <td>${leave.phone}</td>
+                            <td>${leave.reason}</td>
+                            <td>
+                                <button class="btn btn-danger" del_id = "${leave.id}" leave_time = ${leave.leaveTime}>
+                                    <span class="glyphicon glyphicon-trash">撤销</span>
+                                </button>
+                            </td>
+                        </tr>
+                    </c:forEach>
                     </tbody>
                 </table>
 
@@ -87,21 +64,30 @@
     </div>
 </div>
 <script>
-    function subForm() {
-
-        alert("提交成功!请联系相关领导批准!");
-
-
-        /*$.ajax({
-            url: "tableView/exportRosterView",
-            type: "POST",
-            dataType: "html",
-            data: $("#huamingcefrom").serialize(),
-            success: function (data) {
-                $("#view").html(data);
-            }
-        });*/
-    }
+    $(".btn").click(function () {
+        var delId = $(this).attr("del_id");
+        var leaveTime = $(this).attr("leave_time");
+        var thisBtn = $(this);
+//        alert(delId);
+        if(confirm("确定删除出差时间为:"+leaveTime+"的请假信息吗?")) {
+            $.ajax({
+                url: "revokeLeave",
+                type: "POST",
+                data: {"delId": delId},
+                success: function (result) {
+                    if (result.code == 200){
+                        alert("请假信息撤回成功!")
+                        thisBtn.parent().parent().remove();
+                    }
+                    else
+                        alert("请假信息撤回失败!请刷新并重新尝试!")
+                },
+                fail: function () {
+                    alert("系统发生错误!请稍后再试!");
+                }
+            })
+        }
+    })
 </script>
 </body>
 </html>
