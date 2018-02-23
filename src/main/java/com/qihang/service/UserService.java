@@ -1,6 +1,10 @@
 package com.qihang.service;
 
+import com.qihang.model.User;
+
+import java.util.List;
+
 public interface UserService {
 
-    String[] GetUserNameByRiSy(int right,int system);
+    List<User> GetUserNameByRiSy(int right, int system);
 }

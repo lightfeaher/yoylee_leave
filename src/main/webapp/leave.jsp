@@ -58,18 +58,18 @@
                     <div class="form-group">
                         <label  class="input_wh">选择中层领导：</label>
                         <select  name="uLname1" id="lName1">
-                            <option value="1">李老师</option>
-                            <option value="2">张老师</option>
-                            <option value="3">刘老师</option>
+                            <%--<option value="1">李老师</option>--%>
+                            <%--<option value="2">张老师</option>--%>
+                            <%--<option value="3">刘老师</option>--%>
                         </select>
                         <span class="span-sty">*必选</span>
                     </div>
                     <div class="form-group">
                         <label  class="input_wh">选择高层领导：</label>
                         <select  name="uLname2" id="lName2">
-                            <option value="3">李老师</option>
-                            <option value="5">张老师</option>
-                            <option value="6">刘老师</option>
+                            <%--<option value="3">李老师</option>--%>
+                            <%--<option value="5">张老师</option>--%>
+                            <%--<option value="6">刘老师</option>--%>
                         </select>
                         <span class="span-sty">*必选</span>
                     </div>
@@ -82,6 +82,30 @@
 
 </div>
 <script type="text/javascript">
+    $(function () {
+        $.ajax({
+            url:"getZhongUser",
+            type:"GET",
+            dataType:"json",
+            success:function(result){
+                var majors = result.jsondata.users;
+                $.each(majors,function (index,item) {
+                    $("#lName1").append($("<option></option>").attr("value",item.id).text(item.name));
+                });
+            }
+        });
+        $.ajax({
+            url:"getGaoUser",
+            type:"GET",
+            dataType:"json",
+            success:function(result){
+                var majors = result.jsondata.users;
+                $.each(majors,function (index,item) {
+                    $("#lName2").append($("<option></option>").attr("value",item.id).text(item.name));
+                });
+            }
+        });
+    })
     function checkForm(){
         var name = document.getElementById("name").value;
         var leaveTime = document.getElementById("leaveTime").value;

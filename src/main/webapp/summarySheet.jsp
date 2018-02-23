@@ -29,10 +29,10 @@
                 </select>
                 院系:
                 <select name = "systemId" id="systemId">
-                    <option value="0">不限</option>
-                    <option value="1">1系</option>
-                    <option value="2">2系</option>
-                    <option value="3">3系</option>
+                    <%--<option value="0">不限</option>--%>
+                    <%--<option value="1">1系</option>--%>
+                    <%--<option value="2">2系</option>--%>
+                    <%--<option value="3">3系</option>--%>
                 </select>
                 姓名:<input type="text" name="name" id="nameId">
                 <button style="margin-left:20px " class = "btn_select">查询</button>
@@ -77,6 +77,17 @@
     $(function(){
         //去首页
         to_page(1);
+        $.ajax({
+            url:"getSystem",
+            type:"GET",
+            dataType:"json",
+            success:function(result){
+                var majors = result.jsondata.systems;
+                $.each(majors,function (index,item) {
+                    $("#systemId").append($("<option></option>").attr("value",item.id).text(item.system));
+                });
+            }
+        });
     });
     function to_page(pn){
         $.ajax({

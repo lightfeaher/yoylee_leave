@@ -4,6 +4,8 @@ import com.qihang.model.User;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
+import java.util.List;
+
 import static com.qihang.util.TableConstants.TABLEUSER;
 
 public interface UserDao {
@@ -12,9 +14,9 @@ public interface UserDao {
     @Select(value = "select * from "+ TABLEUSER+" where id = #{id}")
     User SelectOneUserById(@Param("id") int id);
 
-    //根据系和职务查询姓名
-    @Select(value = "select name from " + TABLEUSER + " where power = #{right} and system = #{system}")
-    String[] SelectUserByRiSy(@Param("right") int right,@Param("system") int system);
+    //根据系和职务查询姓名与id
+    @Select(value = "select id,name from " + TABLEUSER + " where power = #{right} and system = #{system}")
+    List<User> SelectUserByRiSy(@Param("right") int right, @Param("system") int system);
 
 
 
