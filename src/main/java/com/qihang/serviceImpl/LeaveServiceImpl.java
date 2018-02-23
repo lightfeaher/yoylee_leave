@@ -19,6 +19,9 @@ public class LeaveServiceImpl implements LeaveService {
     public List<Leave> getAllLeave(String powerId,int sysId,int userId){
         return leaveDao.selectAllLeave(powerId,sysId,userId);
     }
+    public List<Leave> getLeaveByLike(int orApprove,int systemId,String name,String powerId,int sysId,int userId){
+        return leaveDao.selectLeaveByLike(orApprove,systemId,name,powerId,sysId,userId);
+    }
 
     public int addLeave(Leave leave) {
         return leaveDao.insertLeave(leave);

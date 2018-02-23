@@ -26,6 +26,57 @@ public class LeaveDynaSqlProvider {
         }.toString();
         return sql;
     }
+    public String selectLeaveByLike(final int orApprove,final int systemId,final String name,final String powerId,final int sysId,final int userId){
+        String sql = new SQL(){
+            {
+                SELECT("*");
+                FROM(TABLELEAVE);
+                //教师(查询自己的请假记录)
+                if (powerId.equals("1")){
+                    WHERE(" u_id = "+userId);
+                    //批准
+                    if (orApprove == 0)
+                        WHERE(" leader1 = 2 and leader2 = 2");
+                    //未批准
+                    if (orApprove == 1)
+                        WHERE(" leader1 != 2 and leader2 != 2");
+                }
+                //中层领导
+                if (powerId.equals("2")){
+                    WHERE(" u_sys = "+sysId);
+                    //批准
+                    if (orApprove == 1)
+                        WHERE(" leader1 = 2 and leader2 = 2");
+                    //未批准
+                    if (orApprove == 2)
+                        WHERE(" leader1 != 2 and leader2 != 2");
+                    //姓名查("利用正则表达式去除空格情况")
+                    if (name.replaceAll("\\s+","") .equals("")){
+                        WHERE(" u_tname = "+name);
+                    }
+                }
+                if (powerId.equals("3")||powerId.equals("4")){
+                    //批准
+                    if (orApprove == 1)
+                        WHERE(" leader1 = 2 and leader2 = 2");
+                    //未批准
+                    if (orApprove == 2)
+                        WHERE(" leader1 != 2 or leader2 != 2");
+                    //姓名查("利用正则表达式去除空格情况")
+                    if (!(name.replaceAll("\\s+","") .equals(""))){
+                        WHERE(" u_tname like '%"+name+"%'");
+                    }
+                    //根据系查询(去除 不限 的情况)
+                    if (systemId != 0){
+                        WHERE(" u_sys = "+systemId);
+                    }
+                }
+
+                ORDER_BY(" sub_time desc");
+            }
+        }.toString();
+        return sql;
+    }
     public String selectLeaveByUser(final String name,final int num){
         String sql = new SQL(){
             {

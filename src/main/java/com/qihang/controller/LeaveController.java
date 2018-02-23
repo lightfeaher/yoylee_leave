@@ -20,13 +20,14 @@ import java.util.List;
 
 @Controller
 public class LeaveController {
+
     @Autowired
     LeaveServiceImpl leaveService;
 
      /*查*/
-     @RequestMapping(value = "/getPrivateLeave")
+     @RequestMapping(value = "/getQueryLeave")
      @ResponseBody
-     public Msg getPrivateLeave(
+     public Msg getQueryLeave(
              @RequestParam(value = "pn", defaultValue = "1") Integer pn
      ){
          //num参数是区分请求(请假查询1 和  汇总表查询2)
@@ -49,6 +50,24 @@ public class LeaveController {
          PageHelper.startPage(pn, 7);
          // startPage后面紧跟的这个查询就是一个分页查询
          List<Leave> leaves = leaveService.getAllLeave("3",3,1); //!!这个地方  需要所有的动态
+         // 使用pageInfo包装查询后的结果，只需要将pageInfo交给页面就行了。
+         // 封装了详细的分页信息,包括有我们查询出来的数据，传入连续显示的页数7
+         PageInfo pageInfo = new PageInfo(leaves, 7);
+         return Msg.success().add("pageInfo",pageInfo);
+     }
+     @RequestMapping(value = "/getLeaveByLike")
+     @ResponseBody
+     public Msg getLeaveByLike(
+             @RequestParam(value = "pn", defaultValue = "1") Integer pn,
+             @RequestParam("orApprove") int orApprove,
+             @RequestParam("systemId") int systemId,
+             @RequestParam("nameId") String name
+     ){
+         //num参数是区分请求(请假查询1 和  汇总表查询2)
+         // 参数:权利标识,系id(中层用,高层查看所有的.高层统一为0,教师统一为-1),登录者id
+         PageHelper.startPage(pn, 7);
+         // startPage后面紧跟的这个查询就是一个分页查询
+         List<Leave> leaves = leaveService.getLeaveByLike(orApprove,systemId,name,"3",3,1); //!!这个地方  需要所有的动态
          // 使用pageInfo包装查询后的结果，只需要将pageInfo交给页面就行了。
          // 封装了详细的分页信息,包括有我们查询出来的数据，传入连续显示的页数7
          PageInfo pageInfo = new PageInfo(leaves, 7);

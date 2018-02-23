@@ -20,18 +20,27 @@
 <div class="container contain_style">
     <div class="panel panel-default">
         <div class="panel-heading"  style="padding: 5px 0 5px 20px">
-            <h5>请假信息汇总表：</h5>
-            <form action="" method="">
-                姓名:<input type="text" name="q-name">
-                出差地点:<input type="text" name="q-set">
-                事由:<input type="text" name="q-reason">
-                <input type="submit" value="查询">
-            </form>
+            <h5>请假信息汇总表：<span style="color: red">教师只能查询自己的,中层领导可以查询本系的,高层领导和院办主任可以查询所有的!</span></h5>
+                是否批准:
+                <select name = "orApprove" id="orApprove">
+                    <option value="0">不限</option>
+                    <option value="1">批准</option>
+                    <option value="2">未批准</option>
+                </select>
+                院系:
+                <select name = "systemId" id="systemId">
+                    <option value="0">不限</option>
+                    <option value="1">1系</option>
+                    <option value="2">2系</option>
+                    <option value="3">3系</option>
+                </select>
+                姓名:<input type="text" name="name" id="nameId">
+                <button style="margin-left:20px " class = "btn_select">查询</button>
         </div>
         <%--<div class="panel-body">
             <div class="row" style="margin-top: 20px;padding: 0 10px 0 10px">--%>
 
-                <table class="table table-bordered table-hover">
+                <table class="table table-bordered table-hover" id="leaveTable">
                     <thead>
                     <tr>
                         <th>序号</th>
@@ -40,7 +49,7 @@
                         <th>出差地点</th>
                         <th>联系方式</th>
                         <th>事由</th>
-                        <th></th>
+                        <th>操作</th>
                     </tr>
                     </thead>
 
@@ -75,7 +84,7 @@
             data:{"pn":pn},
             type:"GET",
             success:function(result){
-                //console.log(result);
+                console.log(result);
                 //1、解析并显示毕业数据
                 build_leave_table(result);
                 //2、解析并显示分页信息
@@ -91,34 +100,27 @@
         var leaves = result.jsondata.pageInfo.list;
         $.each(leaves,function(index,item){
             var id = $("<td></td>").append(item.id);
-            var subTime = $("<td></td>").append(item.subTime);
             var uTname = $("<td></td>").append(item.uTname);
             var leaveTime = $("<td></td>").append(item.leaveTime);
             var place = $("<td></td>").append(item.place);
             var phone = $("<td></td>").append(item.phone);
             var reason = $("<td></td>").append(item.reason);
             //添加详情按钮
-            var seeBtn = $("<button></button>").addClass("btn btn-primary btn-sm see_btn")
-                .append($("<span></span>").addClass("glyphicon glyphicon-pencil")).append("详情");
+            var seeBtn = $("<td></td>").append($("<button></button>").addClass("btn-wh see_btn").append("详情"));
             // 为按钮添加一个自定义的属性，来表示当前请假信息的id
             seeBtn.attr("see-id",item.id);
 
             //append方法执行完成以后还是返回原来的元素
             $("<tr></tr>").append(id)
-                .append(subTime)
                 .append(uTname)
                 .append(leaveTime)
                 .append(place)
                 .append(phone)
                 .append(reason)
-                .append(zhong)
-                .append(gao)
                 .append(seeBtn)
                 .appendTo("#leaveTable tbody");
         });
     }
-
-
     //解析显示分页信息
     var totalRecord,currentPage;//保存总记录数和当前页码
     function build_page_info(result){
@@ -129,7 +131,6 @@
         totalRecord = result.jsondata.pageInfo.total;
         currentPage = result.jsondata.pageInfo.pageNum;
     }
-
     //解析显示分页条，点击分页要能去下一页....
     function build_page_nav(result) {
         //page_nav_area
@@ -184,6 +185,32 @@
         //把ul加入到nav
         var navEle = $("<nav></nav>").append(ul);
         navEle.appendTo("#page_nav_area");
+    }
+
+    //模糊查询
+    $(".btn_select").click(function () {
+        to_selectpage(1);
+    });
+    function to_selectpage(pn){
+        var orApprove = $("#orApprove").val();
+        var systemId = $("#systemId").val();
+        var nameId = $("#nameId").val();
+        $.ajax({
+            url:"getLeaveByLike",
+            type:"GET",
+            data:{"orApprove":orApprove,"systemId":systemId,"nameId":nameId,"pn":pn},
+            success:function (result) {
+                //1、解析并显示毕业数据
+                build_leave_table(result);
+                //2、解析并显示分页信息
+                build_page_info(result);
+                //3、解析显示分页条数据
+                build_page_nav(result);
+            },
+            fail:function () {
+                alert("服务器出现错误,请稍后重试!")
+            }
+        })
     }
 </script>
 </body>

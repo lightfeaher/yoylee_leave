@@ -13,6 +13,8 @@ public interface LeaveDao {
     /*查*/
     @SelectProvider(type = LeaveDynaSqlProvider.class,method = "selectAllLeave")
     List<Leave> selectAllLeave(String powerId,int sysId,int userId);
+    @SelectProvider(type = LeaveDynaSqlProvider.class,method = "selectLeaveByLike")
+    List<Leave> selectLeaveByLike(int orApprove,int systemId,String name,String powerId,int sysId,int userId);
 
     @SelectProvider(type = LeaveDynaSqlProvider.class,method = "selectLeaveByUser")
     List<Leave> selectLeaveByUser(String name,int num);

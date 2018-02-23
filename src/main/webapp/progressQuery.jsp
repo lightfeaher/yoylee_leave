@@ -80,7 +80,7 @@
     });
     function to_page(pn){
         $.ajax({
-            url:"getPrivateLeave",
+            url:"getQueryLeave",
             data:{"pn":pn},
             type:"GET",
             success:function(result){
