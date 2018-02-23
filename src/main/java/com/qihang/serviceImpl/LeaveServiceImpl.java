@@ -2,6 +2,7 @@ package com.qihang.serviceImpl;
 
 import com.qihang.dao.LeaveDao;
 import com.qihang.model.Leave;
+import com.qihang.model.LeaveDetail;
 import com.qihang.service.LeaveService;
 import com.qihang.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,5 +42,9 @@ public class LeaveServiceImpl implements LeaveService {
 
     public int removeLeave(int delId) {
         return leaveDao.deleteLeave(delId);
+    }
+
+    public LeaveDetail getSingleLeave(int id) {
+        return leaveDao.selectSingleLeave(id);
     }
 }

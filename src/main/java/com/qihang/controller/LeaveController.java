@@ -3,6 +3,7 @@ package com.qihang.controller;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.qihang.model.Leave;
+import com.qihang.model.LeaveDetail;
 import com.qihang.model.User;
 import com.qihang.serviceImpl.LeaveServiceImpl;
 import com.qihang.util.Msg;
@@ -10,6 +11,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -88,6 +90,15 @@ public class LeaveController {
          mv.setViewName("approval");
          mv.addObject("leaves",leaves);
          return mv;
+     }
+
+     @RequestMapping(value = "/getSingleLeave/{id}")
+     @ResponseBody
+     public Msg getSingleLeave(
+             @PathVariable("id") int id
+     ){
+        LeaveDetail leave = leaveService.getSingleLeave(id);
+         return Msg.success().add("singleLeave",leave);
      }
     /*增*/
 

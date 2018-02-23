@@ -2,6 +2,7 @@ package com.qihang.dao;
 
 import com.qihang.dao.provider.LeaveDynaSqlProvider;
 import com.qihang.model.Leave;
+import com.qihang.model.LeaveDetail;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
@@ -23,6 +24,14 @@ public interface LeaveDao {
 
     @Select(value = "select * from "+TABLELEAVE+" where u_id = #{uId} and ((leader1 = 1 and leader2 = 1) or (leader1 = 2 and leader2 = 1))")
     List<Leave> selectPrivateLeave(int uId);
+
+    @Select(value = "select * from "+TABLELEAVE+" where id = #{id}")
+    @Results({
+            @Result(property = "system",column = "u_sys",one = @One(select = "com.qihang.dao.SystemDao.selectSystemById")),
+            @Result(property = "user",column = "u_lname1",one = @One(select = "com.qihang.dao.UserDao.selectUserById")),
+            @Result(property = "user2",column = "u_lname2",one = @One(select = "com.qihang.dao.UserDao.selectUserById2"))
+    })
+    LeaveDetail selectSingleLeave(int id);
 
     /*增*/
     @Insert(value = "insert into "+TABLELEAVE+" values(null,#{leave.uId},#{leave.uSys},#{leave.uTname},#{leave.uLname1},#{leave.uLname2},#{leave.leader1},#{leave.leader2},#{leave.place},#{leave.reason},#{leave.phone},#{leave.leaveTime},#{leave.subTime})")

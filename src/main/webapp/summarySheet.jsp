@@ -3,7 +3,8 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <%--<script src="js/jquery-3.2.1.min.js"></script>--%>
-    <script src="http://cdn.bootcss.com/jquery/1.9.0/jquery.min.js"></script>
+    <script src="http://cdn.bootcss.com/jquery/1.9.1/jquery.min.js"></script>
+
     <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
     <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
@@ -17,6 +18,85 @@
     <title>请假信息汇总表页面</title>
 </head>
 <body>
+
+<div  class="modal fade"  id="leaveDails" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="margin-left: 32%;width:36%">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h5 class="modal-title">请假详细信息</h5>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label class="input_wh">姓名:</label>
+                        <div class="col-sm-5">
+                            <span id="name"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="input_wh">院系:</label>
+                        <div class="col-sm-5">
+                            <span id="sys"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="input_wh">出差时间:</label>
+                        <div class="col-sm-5">
+                            <span id="leaveTime"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="input_wh">出差地点:</label>
+                        <div class="col-sm-5">
+                            <span id="place"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="input_wh">联系电话:</label>
+                        <div class="col-sm-5">
+                            <span id="phone"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="input_wh">事由:</label>
+                        <div class="col-sm-5">
+                            <span id="reason"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="input_wh">选择中层领导:</label>
+                        <div class="col-sm-5">
+                            <span id="ulname1"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="input_wh">选择高层领导:</label>
+                        <div class="col-sm-5">
+                            <span id="ulname2"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="input_wh">中层是否批准:</label>
+                        <div class="col-sm-5">
+                            <span id="leader1"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="input_wh">高层是否批准:</label>
+                        <div class="col-sm-5">
+                            <span id="leader2"></span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-wh" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="container contain_style">
     <div class="panel panel-default">
         <div class="panel-heading"  style="padding: 5px 0 5px 20px">
@@ -220,6 +300,36 @@
             },
             fail:function () {
                 alert("服务器出现错误,请稍后重试!")
+            }
+        })
+    }
+
+    //查询详情模态框
+    //点击编辑弹出详情模态框
+    $(document).on("click",".see_btn",function(){
+        //2、查出信息显示在模态框
+        xiangqing($(this).parent().attr("see-id"));
+        $("#leaveDails").modal({
+            backdrop:"static"
+        });
+    });
+    function xiangqing(id) {
+        $.ajax({
+            url: "getSingleLeave/" + id,
+            type: "GET",
+            dataType: "json",
+            success: function (result) {
+                var leave = result.jsondata.singleLeave;
+                $("#name").html(leave.uTname);
+                $("#sys").html(leave.system.system);
+                $("#leaveTime").html(leave.leaveTime);
+                $("#place").html(leave.place);
+                $("#phone").html(leave.phone);
+                $("#reason").html(leave.reason);
+                $("#ulname1").html(leave.user.name);
+                $("#ulname2").html(leave.user2.name);
+                $("#leader1").html(leave.leader1 == 2?"已批准":"未批准");
+                $("#leader2").html(leave.leader2 == 2?"已批准":"未批准");
             }
         })
     }

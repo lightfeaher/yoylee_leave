@@ -1,6 +1,7 @@
 package com.qihang.service;
 
 import com.qihang.model.Leave;
+import com.qihang.model.LeaveDetail;
 
 import java.util.List;
 
@@ -13,4 +14,5 @@ public interface LeaveService {
     int approveLeave(int leaveId,int numId,String powerId);
     List<Leave> getPrivateLeave(int uId);
     int removeLeave(int delId);
+    LeaveDetail getSingleLeave(int id);
 }

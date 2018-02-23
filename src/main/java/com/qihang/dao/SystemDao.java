@@ -11,6 +11,8 @@ public interface SystemDao {
     /*查*/
     @Select(value = "select * from "+ATTRSYSTEM)
     List<System> selectSystem();
+    @Select(value = "select system from "+ATTRSYSTEM+" where id = #{id}")
+    System selectSystemById(int id);
     /*增*/
 
     /*删*/
