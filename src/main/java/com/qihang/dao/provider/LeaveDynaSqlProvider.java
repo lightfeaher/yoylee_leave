@@ -51,7 +51,7 @@ public class LeaveDynaSqlProvider {
                     if (orApprove == 2)
                         WHERE(" leader1 != 2 and leader2 != 2");
                     //姓名查("利用正则表达式去除空格情况")
-                    if (name.replaceAll("\\s+","") .equals("")){
+                    if (!(name.replaceAll("\\s+","") .equals(""))){
                         WHERE(" u_tname = "+name);
                     }
                 }
@@ -85,7 +85,7 @@ public class LeaveDynaSqlProvider {
                 if (num == 0)
                     WHERE(" u_lname1 = "+name+" and leader1 = '1'");
                 if (num == 1)
-                    WHERE(" u_lname2 = "+name+" and leader1 = '2'");
+                    WHERE(" u_lname2 = "+name+" and leader1 = '2' and leader2 = '1'");
 
             }
         }.toString();

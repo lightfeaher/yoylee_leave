@@ -21,19 +21,19 @@
     <table>
         <tr>
             <td class="login_info">账号：</td>
-            <td colspan="2"><input name="username" type="text" class="width150" /></td>
+            <td colspan="2"><input name="username" id="name" type="text" class="width150" /></td>
             <td class="login_error_info"><span class="required">不低于3长度的字母、数字或下划线</span></td>
         </tr>
         <tr><br></tr>
         <tr>
             <td class="login_info">密码：</td>
-            <td colspan="2"><input name="password" type="password" class="width150" /></td>
+            <td colspan="2"><input name="password" id="pass" type="password" class="width150" /></td>
             <td><span class="required">不低于6长度的字母、数字或下划线</span></td>
         </tr>
         <tr>
             <td></td>
             <td class="login_button" colspan="3">
-                <input type="button" style="cursor:pointer;" value=" 登 录 " onclick="location.href=''" class="button3" >
+                <input type="button" style="cursor:pointer;" id="btn-sub" value=" 登 录 "  class="button3" >
                 <input type="reset" style="cursor:pointer;" value=" 清 空 " class="button3">
             </td>
             <td><span class="required"></span></td>
@@ -42,7 +42,28 @@
     </table>
 </div>
 <script type="text/javascript">
-
+    $("#btn-sub").click(function () {
+        var name = $("#name").val();
+        var pass = $("#pass").val();
+        $.ajax({
+            url:"testUser",
+            type:"POST",
+            data:{"name":name,"pass":pass},
+            success:function (result) {
+                if (result.code === 200){
+                    location.href = "managemain.jsp";
+                }else if (result.code === 201){
+                    location.href = "manage.jsp"
+                }else{
+                    alert("登录失败请检查用户名或者密码！");
+                    location.href = "index.jsp";
+                }
+            },
+            fail:function () {
+                alert("系统出现错误,请稍后重试!")
+            }
+        })
+    })
 </script>
 </body>
 

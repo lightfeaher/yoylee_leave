@@ -9,5 +9,5 @@ public class TableConstants {
     public static final String ATTRSTATE = "attr_state";
 
     // 用户的session对象
-    public static final String USER_SESSION = "user_session";
+    public static final String USER_SESSION = "user";
 }

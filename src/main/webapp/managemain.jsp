@@ -18,10 +18,13 @@
             <img src="image/zd.png" alt="">
         </div>
         <div class="top0 top3">
-            <a href="logout">注销</a>
+            <a href="logout" style="color: red">注销用户</a>
         </div>
         <div class="top2">
-            用户名:<span id="userid"></span>
+            <b>权限:</b><span>${sessionScope.user.power == 1?"教师":(sessionScope.user.power==2?"中级领导":(sessionScope.user.power==3?"高级领导":"院办主任"))}</span>
+        </div>
+        <div class="top2">
+            <b>用户名:</b><span>${sessionScope.user.name}</span>
         </div>
     </div>
     <div class="nav2">

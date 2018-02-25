@@ -19,7 +19,7 @@
 </head>
 <body>
 
-<div  class="modal fade"  id="leaveDails" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="margin-left: 32%;width:36%">
+<div  class="modal fade"  id="leaveDails" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="margin-left: 25%;width:50%">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -163,6 +163,7 @@
             dataType:"json",
             success:function(result){
                 var majors = result.jsondata.systems;
+                $("#systemId").append($("<option></option>").attr("value","").text("不限"));
                 $.each(majors,function (index,item) {
                     $("#systemId").append($("<option></option>").attr("value",item.id).text(item.system));
                 });

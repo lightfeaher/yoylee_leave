@@ -12,6 +12,8 @@ import static com.qihang.util.TableConstants.TABLEUSER;
 public interface UserDao {
     /*查*/
 
+    @Select(value = "select * from "+TABLEUSER+" where name = #{name} and password = #{pass}")
+    User testUser(@Param("name") String name,@Param("pass") String pass);
     @Select(value = "select name from "+ TABLEUSER+" where id = #{id}")
     User selectUserById(@Param("id") int id);
     @Select(value = "select name from "+ TABLEUSER+" where id = #{id}")

@@ -9,7 +9,11 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import sun.misc.BASE64Encoder;
 
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 import java.util.List;
 
@@ -30,6 +34,13 @@ public class JunitTest {
     @Before
     public void init(){
 
+    }
+    @Test
+    public void coutMd5Pass() throws NoSuchAlgorithmException, UnsupportedEncodingException {
+        MessageDigest md5=MessageDigest.getInstance("MD5");
+        BASE64Encoder base64en = new BASE64Encoder();
+        String newpass = base64en.encode(md5.digest("123123".getBytes("utf-8")));
+        System.out.println(newpass);
     }
     //测试方法
     @Test

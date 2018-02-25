@@ -16,7 +16,11 @@ public class UserServiceImpl  implements UserService {
     UserDao userDao;
 
 
-    public List<User> GetUserNameByRiSy(int right, int system) {
+    public User testUser(String name, String pass) {
+        return userDao.testUser(name,pass);
+    }
+
+    public List<User> getUserNameByRiSy(int right, int system) {
         return  userDao.SelectUserByRiSy(right,system);
     }
 }
