@@ -163,7 +163,7 @@
             dataType:"json",
             success:function(result){
                 var majors = result.jsondata.systems;
-                $("#systemId").append($("<option></option>").attr("value","").text("不限"));
+                $("#systemId").append($("<option></option>").attr("value",0).text("不限"));
                 $.each(majors,function (index,item) {
                     $("#systemId").append($("<option></option>").attr("value",item.id).text(item.system));
                 });

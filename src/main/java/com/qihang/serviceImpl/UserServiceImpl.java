@@ -23,4 +23,8 @@ public class UserServiceImpl  implements UserService {
     public List<User> getUserNameByRiSy(int right, int system) {
         return  userDao.SelectUserByRiSy(right,system);
     }
+
+    public int updatePassword(String pass, int id) {
+        return userDao.updatePassword(pass,id);
+    }
 }

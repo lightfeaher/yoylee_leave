@@ -32,7 +32,7 @@
                 <form id="huamingcefrom" method="post" class="form-horizontal">
                     <div class="form-group">
                         <label class="input_wh">姓名：</label>
-                        <input type="text"  class="input_wh2"  name="uTname" id="name">
+                        <input type="text"  class="input_wh2"  name="uTname" id="name" value="${sessionScope.user.name}">
                         <span class="span-sty">*必填</span>
                     </div>
                     <div class="form-group">
@@ -144,7 +144,7 @@
                 success: function (data) {
                     if (data.code == 200) {
                         alert("提交请假信息成功!请联系相关领导批改!请勿重复提交!");
-                        $(":input").not("select").val("");  //清空请假信息
+                        !$(":input").not("select").val("");  //清空请假信息
                     }
                     else
                         alert("提交失败，请重新提交，如若不成功，请联系管理人员！")

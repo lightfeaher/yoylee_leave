@@ -7,4 +7,5 @@ import java.util.List;
 public interface UserService {
     User testUser(String name,String pass);
     List<User> getUserNameByRiSy(int right, int system);
+    int updatePassword(String pass,int id);
 }

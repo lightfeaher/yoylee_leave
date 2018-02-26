@@ -4,6 +4,7 @@ import com.qihang.model.User;
 import com.qihang.model.User2;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
 
@@ -30,6 +31,7 @@ public interface UserDao {
     /*删*/
 
     /*改*/
-
+    @Update(value = "update "+TABLEUSER+" set password = #{pass} where id = #{id}")
+    int updatePassword(@Param("pass") String pass,@Param("id") int id);
 
 }

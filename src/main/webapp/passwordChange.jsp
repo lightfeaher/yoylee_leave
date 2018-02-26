@@ -29,25 +29,27 @@
                 <form id="huamingcefrom" method="post">
                     <div class="form-group">
                         <label  class="input_wh">姓名：</label>
-                        <input type="text" class="input_wh2" name="grade">
+                        <input type="text" class="input_wh2" name="name" id="name" value="${sessionScope.user.name}" readonly>
                     </div>
                     <div class="form-group">
                         <label  class="input_wh">原密码：</label>
-                        <input type="password" class="input_wh2" name="grade">
+                        <input type="password" class="input_wh2" name="oldpass" id="oldpass">
                     </div>
                     <div class="form-group">
                         <label  class="input_wh">新密码：</label>
-                        <input type="password" class="input_wh2" name="klass">
+                        <input type="password" class="input_wh2" name="newpass1" id="newpass1">
                     </div>
                     <div class="form-group">
                         <label  class="input_wh">重复新密码：</label>
-                        <input type="password" class="input_wh2" name="klass">
+                        <input type="password" class="input_wh2" name="newpass2" id="newpass2">
                     </div>
-                    <button type="button" class="btn btn-primary" onclick="subForm()">修改</button>
+                    <button type="button" class="btn btn-primary">修改</button>
                 </form>
             </div>
         </div>
-        <div class="panel-footer" style="color: red">修改成功!新密码为:***</div>
+        <div class="panel-footer" style="color: red">
+            <span id="message"></span>
+        </div>
     </div>
 
     <div id="view">
@@ -55,21 +57,49 @@
     </div>
 </div>
 <script>
-    function subForm() {
-
-        alert("修改成功!新密码为:*****,请谨记!");
-
-
-        /*$.ajax({
-            url: "tableView/exportRosterView",
-            type: "POST",
-            dataType: "html",
-            data: $("#huamingcefrom").serialize(),
-            success: function (data) {
-                $("#view").html(data);
-            }
-        });*/
+    function checkForm(){
+        var oldpass = $("#oldpass").val();
+        var newpass1 = $("#newpass1").val();
+        var newpass2 = $("#newpass2").val();
+        if (oldpass.replace(/^ +| +$/g, '') === "") {
+            alert("密码不能为空！");
+            return false;
+        }
+        else if (newpass1.replace(/^ +| +$/g, '') === "") {
+            alert("新密码不能为空！");
+            return false;
+        }
+        else if (newpass2.replace(/^ +| +$/g, '') === "") {
+            alert("重复密码不能为空！");
+            return false;
+        }else if (newpass1 !== newpass2){
+            alert("新密码两次输入不相同,请重新输入!");
+            return false;
+        }
+        else return true;
     }
+    $(function () {
+        $(".btn").click(function () {
+            if(checkForm()){
+                $(".btn").attr({"disabled": "disabled"}).val("修改中..");
+                var oldpass = $("#oldpass").val();
+                var newpass1 = $("#newpass1").val();
+                var newpass2 = $("#newpass2").val();
+                $.ajax({
+                    url:"changePassword",
+                    type:"POST",
+                    data:{"oldpass":oldpass,"newpass1":newpass1,"newpass2":newpass2},
+                    success:function (result) {
+                        $("#message").html(result.msg);
+                        $(".btn").removeAttr("disabled").html("修改");
+                    },
+                    fail:function () {
+                        alert("系统出现错误,请稍后重试!");
+                    }
+                })
+            }
+        })
+    })
 </script>
 </body>
 </html>

@@ -6,12 +6,15 @@ import com.qihang.util.Msg;
 import com.qihang.util.TableConstants;
 import javafx.scene.control.Tab;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.objenesis.instantiator.sun.MagicInstantiator;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 import sun.misc.BASE64Encoder;
 
+import javax.jws.WebParam;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
@@ -53,6 +56,44 @@ public class UserController {
         return Msg.fail();
     }
 
+    @RequestMapping(value = "/changePassword")
+    @ResponseBody
+    public Msg changePassword(
+            @RequestParam("oldpass") String oldpass,
+            @RequestParam("newpass1") String newpass1,
+            @RequestParam("newpass2") String newpass2,
+            HttpServletRequest request,
+            Msg msg
+    ) throws NoSuchAlgorithmException, UnsupportedEncodingException {
+        HttpSession session = request.getSession();
+        if (newpass1.equals(newpass2)){
+            //判断该用户的旧密码是否正确
+            User user = (User) session.getAttribute(TableConstants.USER_SESSION);
+            if (user!=null){
+                MessageDigest md5=MessageDigest.getInstance("MD5");
+                BASE64Encoder base64en = new BASE64Encoder();
+                String oldpass1 = base64en.encode(md5.digest(oldpass.getBytes("utf-8")));
+                String newpass = base64en.encode(md5.digest(newpass1.getBytes("utf-8")));
+                User user1 = userService.testUser(user.getName(),oldpass1);
+                if (user1!=null){
+                    int re = userService.updatePassword(newpass,user.getId());
+                    if (re == 1){
+                        msg.setMsg("更新密码成功,密码为:"+newpass1);
+                        return msg;
+                    }
+                }else {
+                    msg.setMsg("旧密码错误!请重新输入!");
+                    return msg;
+                }
+            }
+            msg.setMsg("更新失败!系统出现错误!请稍后重试!");
+            return msg;
+        }else{
+            msg.setMsg("两次新密码输入不相同!请重新输入!");
+            return msg;
+        }
+    }
+
     @RequestMapping(value = "/getZhongUser")
     @ResponseBody
     public Msg getZhongUser(
@@ -76,5 +117,20 @@ public class UserController {
         User user = (User) session.getAttribute(TableConstants.USER_SESSION);
         List<User> users = userService.getUserNameByRiSy(3,Integer.valueOf(user.getSystem())); //此处的系代码需要动态!!!!!
         return Msg.success().add("users",users);
+    }
+
+    @RequestMapping(value = "clearSession")
+    public ModelAndView clearSession(
+            ModelAndView mv,
+            HttpServletRequest request
+    ){
+        //获取session
+        HttpSession session = request.getSession();
+        //清除保存内容
+        session.removeAttribute("user");
+        //销毁该session:清除保存内容与sessionid
+        session.invalidate();
+        mv.setViewName("index");
+        return mv;
     }
 }

@@ -39,7 +39,7 @@ public class LeaveDynaSqlProvider {
                         WHERE(" leader1 = 2 and leader2 = 2");
                     //未批准
                     if (orApprove == 1)
-                        WHERE(" leader1 != 2 and leader2 != 2");
+                        WHERE(" (leader1 = 3 or leader2 = 3)");
                 }
                 //中层领导
                 if (powerId.equals("2")){
@@ -49,10 +49,10 @@ public class LeaveDynaSqlProvider {
                         WHERE(" leader1 = 2 and leader2 = 2");
                     //未批准
                     if (orApprove == 2)
-                        WHERE(" leader1 != 2 and leader2 != 2");
+                        WHERE(" (leader1 = 3 or leader2 = 3)");
                     //姓名查("利用正则表达式去除空格情况")
                     if (!(name.replaceAll("\\s+","") .equals(""))){
-                        WHERE(" u_tname = "+name);
+                        WHERE(" u_tname like '%"+name+"%'");
                     }
                 }
                 if (powerId.equals("3")||powerId.equals("4")){
@@ -61,7 +61,7 @@ public class LeaveDynaSqlProvider {
                         WHERE(" leader1 = 2 and leader2 = 2");
                     //未批准
                     if (orApprove == 2)
-                        WHERE(" leader1 != 2 or leader2 != 2");
+                        WHERE(" (leader1 = 3 or leader2 = 3)");
                     //姓名查("利用正则表达式去除空格情况")
                     if (!(name.replaceAll("\\s+","") .equals(""))){
                         WHERE(" u_tname like '%"+name+"%'");

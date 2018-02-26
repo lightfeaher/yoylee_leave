@@ -42,27 +42,43 @@
     </table>
 </div>
 <script type="text/javascript">
+    function checkForm(){
+        var name = document.getElementById("name").value;
+        var pass = document.getElementById("pass").value;
+        if (name.replace(/^ +| +$/g, '') === "") {
+            alert("姓名不能为空！");
+            return false;
+        }
+        else if (pass.replace(/^ +| +$/g, '') === "") {
+            alert("密码不能为空！");
+            return false;
+        }
+        else return true;
+    }
     $("#btn-sub").click(function () {
-        var name = $("#name").val();
-        var pass = $("#pass").val();
-        $.ajax({
-            url:"testUser",
-            type:"POST",
-            data:{"name":name,"pass":pass},
-            success:function (result) {
-                if (result.code === 200){
-                    location.href = "managemain.jsp";
-                }else if (result.code === 201){
-                    location.href = "manage.jsp"
-                }else{
-                    alert("登录失败请检查用户名或者密码！");
-                    location.href = "index.jsp";
+        if (checkForm()){
+            $(".button3").attr({"disabled": "disabled"}).val("登录中..");
+            var name = $("#name").val();
+            var pass = $("#pass").val();
+            $.ajax({
+                url:"testUser",
+                type:"POST",
+                data:{"name":name,"pass":pass},
+                success:function (result) {
+                    if (result.code === 200){
+                        location.href = "managemain.jsp";
+                    }else if (result.code === 201){
+                        location.href = "manage.jsp"
+                    }else{
+                        alert("登录失败请检查用户名或者密码！");
+                        location.href = "index.jsp";
+                    }
+                },
+                fail:function () {
+                    alert("系统出现错误,请稍后重试!")
                 }
-            },
-            fail:function () {
-                alert("系统出现错误,请稍后重试!")
-            }
-        })
+            })
+        }
     })
 </script>
 </body>

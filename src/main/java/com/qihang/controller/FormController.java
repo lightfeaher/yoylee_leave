@@ -15,7 +15,6 @@ public class FormController{
 	@RequestMapping(value="/{formName}")
 	 public String loginForm(@PathVariable String formName){
 		// 动态跳转页面
-		System.out.println(formName);
 		return formName;
 	}
 

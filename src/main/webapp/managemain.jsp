@@ -18,7 +18,7 @@
             <img src="image/zd.png" alt="">
         </div>
         <div class="top0 top3">
-            <a href="logout" style="color: red">注销用户</a>
+            <span id="logout" style="color: red;cursor:pointer">注销用户</span>
         </div>
         <div class="top2">
             <b>权限:</b><span>${sessionScope.user.power == 1?"教师":(sessionScope.user.power==2?"中级领导":(sessionScope.user.power==3?"高级领导":"院办主任"))}</span>
@@ -62,5 +62,10 @@
         </center>
     </div>
 </div>
+<script type="text/javascript">
+    $("#logout").click(function () {
+        location.href="clearSession";
+    })
+</script>
 </body>
 </html>
