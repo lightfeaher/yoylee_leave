@@ -13,16 +13,16 @@
     <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
     <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
-    <title>密码修改页面</title>
+    <title>密码重置页面</title>
 </head>
 <body>
 <div class="container contain_style" >
     <div class="panel panel-default">
         <div class="panel-heading"  style="padding: 5px 0 5px 20px">
-            <h4>个人密码修改：</h4>
+            <h4>用户密码重置：</h4>
         </div>
         <div class="panel-body" style="padding: 0px 0px 0px 30px">
-            <p><h4><b>注意:</b>请谨记您修改的密码!密码忘记可找相关管理员重置!</h4></p>
+            <p><h4><b>注意:</b>密码重置后为:123456,请让该教师尽快自己修改密码!</h4></p>
         </div>
         <div class="panel-body" style="padding: 30px 200px 30px 200px">
             <div class="row">
@@ -31,19 +31,7 @@
                         <label  class="input_wh">账号：</label>
                         <input type="text" class="input_wh2" name="name" id="name" value="${sessionScope.user.name}" readonly>
                     </div>
-                    <div class="form-group">
-                        <label  class="input_wh">原密码：</label>
-                        <input type="password" class="input_wh2" name="oldpass" id="oldpass">
-                    </div>
-                    <div class="form-group">
-                        <label  class="input_wh">新密码：</label>
-                        <input type="password" class="input_wh2" name="newpass1" id="newpass1">
-                    </div>
-                    <div class="form-group">
-                        <label  class="input_wh">重复新密码：</label>
-                        <input type="password" class="input_wh2" name="newpass2" id="newpass2">
-                    </div>
-                    <button type="button" class="btn btn-primary">修改</button>
+                    <button type="button" class="btn btn-primary">重置密码</button>
                 </form>
             </div>
         </div>

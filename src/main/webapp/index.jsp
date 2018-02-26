@@ -28,7 +28,7 @@
         <tr>
             <td class="login_info">密码：</td>
             <td colspan="2"><input name="password" id="pass" type="password" class="width150" /></td>
-            <td><span class="required">不低于6长度的字母、数字或下划线</span></td>
+            <td><span class="required">不低于3长度的字母、数字或下划线</span></td>
         </tr>
         <tr>
             <td></td>
