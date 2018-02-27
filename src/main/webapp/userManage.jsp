@@ -18,8 +18,50 @@
     <title>用户管理</title>
 </head>
 <body>
-
-<div  class="modal fade"  id="leaveDails" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="margin-left: 25%;width:50%">
+<%--编辑用户模态框--%>
+<div  class="modal fade"  id="changeUser" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="margin-left: 25%;width:50%">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h5 class="modal-title">编辑用户</h5>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label class="input_wh">账号:</label>
+                        <div class="col-sm-5">
+                            <input type="text" name="name_add" id="name_change" class="input_wh2">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="input_wh">院系:</label>
+                        <select name = "system_add" id="system_change" style="margin-left: 15px"></select>
+                    </div>
+                    <div class="form-group">
+                        <label class="input_wh">权限:</label>
+                        <select name = "post_add" id="post_change" style="margin-left: 15px">
+                            <option value="1">教师</option>
+                            <option value="2">中层领导</option>
+                            <option value="3">高层领导</option>
+                            <option value="4">院办主任</option>
+                            <option value="5">管理员</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <span style="color: red;margin-left: 100px" id="message_change"></span>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-wh" id="update_btn">更新</button>
+                <button type="button" class="btn-wh" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+<%--新增用户模态框--%>
+<div  class="modal fade"  id="addUser" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="margin-left: 25%;width:50%">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -31,25 +73,30 @@
                     <div class="form-group">
                         <label class="input_wh">账号:</label>
                         <div class="col-sm-5">
-                            <span id="name"></span>
+                            <input type="text" name="name_add" id="name_add" class="input_wh2">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="input_wh">院系:</label>
-                        <div class="col-sm-5">
-                            <span id="sys"></span>
-                        </div>
+                        <select name = "system_add" id="system_add" style="margin-left: 15px"></select>
                     </div>
                     <div class="form-group">
                         <label class="input_wh">权限:</label>
-                        <div class="col-sm-5">
-                            <span id="leaveTime"></span>
-                        </div>
+                        <select name = "post_add" id="post_add" style="margin-left: 15px">
+                            <option value="1">教师</option>
+                            <option value="2">中层领导</option>
+                            <option value="3">高层领导</option>
+                            <option value="4">院办主任</option>
+                            <option value="5">管理员</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <span style="color: red;margin-left: 100px" id="message_add">添加用户时,请保证用户账号的唯一性!</span>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn-wh" >添加</button>
+                <button type="button" class="btn-wh" id="add_btn">添加</button>
                 <button type="button" class="btn-wh" data-dismiss="modal">关闭</button>
             </div>
         </div>
@@ -70,10 +117,10 @@
         <%--<div class="panel-body">
             <div class="row" style="margin-top: 20px;padding: 0 10px 0 10px">--%>
 
-                <table class="table table-bordered table-hover" id="leaveTable">
+                <table class="table table-bordered table-hover" id="userTable">
                     <thead>
                     <tr>
-                        <th>序号</th>
+                        <th>id</th>
                         <th>账号</th>
                         <th>院系</th>
                         <th>权限</th>
@@ -112,21 +159,27 @@
             success:function(result){
                 var majors = result.jsondata.systems;
                 $("#systemId").append($("<option></option>").attr("value",0).text("不限"));
+                $("#system_add").append($("<option></option>").attr("value",0).text("所有院系"));
+                $("#system_change").append($("<option></option>").attr("value",0).text("所有院系"));
                 $.each(majors,function (index,item) {
+                    $("#system_add").append($("<option></option>").attr("value",item.id).text(item.system));
                     $("#systemId").append($("<option></option>").attr("value",item.id).text(item.system));
+                    $("#system_change").append($("<option></option>").attr("value",item.id).text(item.system));
                 });
             }
         });
+
+
     });
     function to_page(pn){
         $.ajax({
-            url:"getAllLeave",
+            url:"getAllUser",
             data:{"pn":pn},
             type:"GET",
             success:function(result){
                 console.log(result);
-                //1、解析并显示毕业数据
-                build_leave_table(result);
+                //1、解析并显示数据
+                build_user_table(result);
                 //2、解析并显示分页信息
                 build_page_info(result);
                 //3、解析显示分页条数据
@@ -134,31 +187,29 @@
             }
         });
     }
-    function build_leave_table(result){
+    function build_user_table(result){
         //清空table表格
-        $("#leaveTable tbody").empty();
-        var leaves = result.jsondata.pageInfo.list;
-        $.each(leaves,function(index,item){
+        $("#userTable tbody").empty();
+        var users = result.jsondata.pageInfo.list;
+        $.each(users,function(index,item){
             var id = $("<td></td>").append(item.id);
-            var uTname = $("<td></td>").append(item.uTname);
-            var leaveTime = $("<td></td>").append(item.leaveTime);
-            var place = $("<td></td>").append(item.place);
-            var phone = $("<td></td>").append(item.phone);
-            var reason = $("<td></td>").append(item.reason);
-            //添加详情按钮
-            var seeBtn = $("<td></td>").append($("<button></button>").addClass("btn-wh see_btn").append("详情"));
-            // 为按钮添加一个自定义的属性，来表示当前请假信息的id
-            seeBtn.attr("see-id",item.id);
+            var name = $("<td></td>").append(item.name);
+            var power = $("<td></td>").append(item.po.post);
+            var system = $("<td></td>").append(item.sys.system);
+            //添加修改按钮
+            var changeBtn = $("<td></td>").append($("<button></button>").addClass("btn-wh change_btn").append("修改"))
+                .append($("<button></button>").addClass("btn-wh delete_btn").append("删除"));
+            // 为按钮的父元素添加一个自定义的属性，来表示当前请假信息的id
+            changeBtn.attr("change-id",item.id);
 
             //append方法执行完成以后还是返回原来的元素
             $("<tr></tr>").append(id)
-                .append(uTname)
-                .append(leaveTime)
-                .append(place)
-                .append(phone)
-                .append(reason)
-                .append(seeBtn)
-                .appendTo("#leaveTable tbody");
+                .append(name)
+                .append(system)
+                .append(power)
+                .append(changeBtn)
+//                .append(deleteBtn)
+                .appendTo("#userTable tbody");
         });
     }
     //解析显示分页信息
@@ -232,16 +283,15 @@
         to_selectpage(1);
     });
     function to_selectpage(pn){
-        var orApprove = $("#orApprove").val();
         var systemId = $("#systemId").val();
         var nameId = $("#nameId").val();
         $.ajax({
-            url:"getLeaveByLike",
+            url:"getUserByLike",
             type:"GET",
-            data:{"orApprove":orApprove,"systemId":systemId,"nameId":nameId,"pn":pn},
+            data:{"systemId":systemId,"nameId":nameId,"pn":pn},
             success:function (result) {
-                //1、解析并显示毕业数据
-                build_leave_table(result);
+                //1、解析并显示数据
+                build_user_table(result);
                 //2、解析并显示分页信息
                 build_page_info(result);
                 //3、解析显示分页条数据
@@ -253,35 +303,106 @@
         })
     }
 
-    //查询详情模态框
-    //点击编辑弹出详情模态框
-    $(document).on("click",".see_btn",function(){
-        //2、查出信息显示在模态框
-        xiangqing($(this).parent().attr("see-id"));
-        $("#leaveDails").modal({
+    //删除用户
+    $(document).on("click",".delete_btn",function(){
+        var id = $(this).parent().attr("change-id");
+        var thisbtn = $(this);
+        if(confirm("确定要删除id为: "+id+" 的用户吗?")){
+            $.ajax({
+                url:"removeUser",
+                type:"POST",
+                data:{"id":id},
+                success:function (result) {
+                    if (result.code === 200) {
+                        alert("删除成功!");
+                        thisbtn.parent().parent().remove();
+                    }else{
+                        alert("删除失败!")
+                    }
+                },
+                fail:function () {
+                    alert("系统出现错误!请稍后重试!");
+                }
+            })
+        }
+    });
+
+    //增加用户模态框
+    //点击增加用户弹出增加用户模态框
+    $(document).on("click",".btn_add",function(){
+        $("#addUser").modal({
             backdrop:"static"
         });
     });
-    function xiangqing(id) {
+    $("#add_btn").click(function () {
+        var name = $("#name_add").val();
+        var sys = $("#system_add").val();
+        var post = $("#post_add").val();
+        if(name.replace(/^ +| +$/g, '') === ""){
+            $("#message_add").html("用户名不可以为空!");
+        }else
         $.ajax({
-            url: "getSingleLeave/" + id,
-            type: "GET",
-            dataType: "json",
-            success: function (result) {
-                var leave = result.jsondata.singleLeave;
-                $("#name").html(leave.uTname);
-                $("#sys").html(leave.system.system);
-                $("#leaveTime").html(leave.leaveTime);
-                $("#place").html(leave.place);
-                $("#phone").html(leave.phone);
-                $("#reason").html(leave.reason);
-                $("#ulname1").html(leave.user.name);
-                $("#ulname2").html(leave.user2.name);
-                $("#leader1").html(leave.leader1 == 2?"已批准":"未批准");
-                $("#leader2").html(leave.leader2 == 2?"已批准":"未批准");
+            url:"addUser",
+            type:"POST",
+            data:{"name":name,"system":sys,"post":post},
+            success:function (result) {
+                if (result.code === 200){
+                    $("#message_add").html("添加用户: "+name+" 成功!");
+                    $("#name_add").val("");
+                }else{
+                    $("#message_add").html("添加用户失败!请稍后重试!");
+                }
+            },
+            fail:function () {
+                $("#message_add").html("系统出现错误!请稍后重试!");
+            }
+        })
+    })
+
+    //修改用户模态框
+    //点击修改弹出修改用户信息模态框
+    var changeId;
+    $(document).on("click",".change_btn",function(){
+        changeId = $(this).parent().attr("change-id");
+        //调用方法
+        changeUser(changeId);
+        //显示模态框
+        $("#changeUser").modal({
+            backdrop:"static"
+        });
+    })
+    function changeUser(changeId) {
+        $.ajax({
+            url:"getUserById",
+            type:"POST",
+            data:{"id":changeId},
+            success:function (result) {
+                var user = result.jsondata.user;
+                $("#name_change").val(user.name);
+                $("#post_change").val(user.post);
+                $("#system_change").val(user.system);
             }
         })
     }
+
+    //点击更新
+    $(document).on("click","#update_btn",function () {
+        var name = $("#name_change").val();
+        var sys = $("#system_change").val();
+        var post = $("#post_change").val();
+        $.ajax({
+            url:"changeUser",
+            type:"POST",
+            data:{"id":changeId,"name":name,"system":sys,"post":post},
+            success:function (result) {
+                if (result.code === 200){
+                    $("#changeUser").modal("hide");
+                    to_page(currentPage);
+                }else
+                    alert("更新失败!");
+            }
+        })
+    })
 </script>
 </body>
 </html>

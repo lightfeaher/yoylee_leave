@@ -4,11 +4,12 @@ public class User2 {
     private int id;
     private String name;
     private String password;
-    private String power;
+    private String post;
     private String system;
+    private Post po;
+    private System sys;
 
     public User2(){}
-
 
 
     public int getId() {
@@ -35,12 +36,12 @@ public class User2 {
         this.password = password;
     }
 
-    public String getPower() {
-        return power;
+    public String getPost() {
+        return post;
     }
 
-    public void setPower(String power) {
-        this.power = power;
+    public void setPost(String post) {
+        this.post = post;
     }
 
     public String getSystem() {
@@ -49,5 +50,21 @@ public class User2 {
 
     public void setSystem(String system) {
         this.system = system;
+    }
+
+    public Post getPo() {
+        return po;
+    }
+
+    public void setPo(Post po) {
+        this.po = po;
+    }
+
+    public System getSys() {
+        return sys;
+    }
+
+    public void setSys(System sys) {
+        this.sys = sys;
     }
 }

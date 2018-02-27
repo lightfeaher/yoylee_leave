@@ -29,7 +29,7 @@
                 <form id="huamingcefrom" method="post">
                     <div class="form-group">
                         <label  class="input_wh">账号：</label>
-                        <input type="text" class="input_wh2" name="name" id="name" value="${sessionScope.user.name}" readonly>
+                        <input type="text" class="input_wh2" name="name" id="name">
                     </div>
                     <button type="button" class="btn btn-primary">重置密码</button>
                 </form>
@@ -46,45 +46,32 @@
 </div>
 <script>
     function checkForm(){
-        var oldpass = $("#oldpass").val();
-        var newpass1 = $("#newpass1").val();
-        var newpass2 = $("#newpass2").val();
-        if (oldpass.replace(/^ +| +$/g, '') === "") {
-            alert("密码不能为空！");
-            return false;
-        }
-        else if (newpass1.replace(/^ +| +$/g, '') === "") {
-            alert("新密码不能为空！");
-            return false;
-        }
-        else if (newpass2.replace(/^ +| +$/g, '') === "") {
-            alert("重复密码不能为空！");
-            return false;
-        }else if (newpass1 !== newpass2){
-            alert("新密码两次输入不相同,请重新输入!");
+        var name = $("#name").val();
+        if (name.replace(/^ +| +$/g, '') === "") {
+            alert("账号不能为空！");
             return false;
         }
         else return true;
     }
     $(function () {
         $(".btn").click(function () {
+            var name = $("#name").val();
             if(checkForm()){
-                $(".btn").attr({"disabled": "disabled"}).val("修改中..");
-                var oldpass = $("#oldpass").val();
-                var newpass1 = $("#newpass1").val();
-                var newpass2 = $("#newpass2").val();
-                $.ajax({
-                    url:"changePassword",
-                    type:"POST",
-                    data:{"oldpass":oldpass,"newpass1":newpass1,"newpass2":newpass2},
-                    success:function (result) {
-                        $("#message").html(result.msg);
-                        $(".btn").removeAttr("disabled").html("修改");
-                    },
-                    fail:function () {
-                        alert("系统出现错误,请稍后重试!");
-                    }
-                })
+                if (confirm("确定要重置账号为: "+name+" 的密码吗?")){
+                    $(".btn").attr({"disabled": "disabled"}).val("重置中..");
+                    $.ajax({
+                        url:"resetPassword",
+                        type:"POST",
+                        data:{"name":name},
+                        success:function (result) {
+                            $("#message").html(result.msg);
+                            $(".btn").removeAttr("disabled").html("重置密码");
+                        },
+                        fail:function () {
+                            alert("系统出现错误,请稍后重试!");
+                        }
+                    })
+                }
             }
         })
     })

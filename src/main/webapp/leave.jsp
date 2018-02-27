@@ -143,8 +143,8 @@
                 data: $("#huamingcefrom").serialize(),
                 success: function (data) {
                     if (data.code == 200) {
-                        alert("提交请假信息成功!请联系相关领导批改!请勿重复提交!");
-                        !$(":input").not("select").val("");  //清空请假信息
+                        alert("提交请假信息成功!请联系相关领导批准!");
+//                        $(":input").not("select").val("");  //清空请假信息
                     }
                     else
                         alert("提交失败，请重新提交，如若不成功，请联系管理人员！")

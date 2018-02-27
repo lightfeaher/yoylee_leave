@@ -4,10 +4,14 @@ public class User {
     private int id;
     private String name;
     private String password;
-    private String power;
+    private String post;
     private String system;
 
     public User(){}
+
+    public int getId() {
+        return id;
+    }
 
     @Override
     public String toString() {
@@ -15,13 +19,9 @@ public class User {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", password='" + password + '\'' +
-                ", power='" + power + '\'' +
+                ", post='" + post + '\'' +
                 ", system='" + system + '\'' +
                 '}';
-    }
-
-    public int getId() {
-        return id;
     }
 
     public void setId(int id) {
@@ -44,12 +44,12 @@ public class User {
         this.password = password;
     }
 
-    public String getPower() {
-        return power;
+    public String getPost() {
+        return post;
     }
 
-    public void setPower(String power) {
-        this.power = power;
+    public void setPost(String post) {
+        this.post = post;
     }
 
     public String getSystem() {

@@ -32,7 +32,7 @@
                 <table class="table table-bordered table-hover" id="leaveTable" style="padding: 0 0 0 0">
                     <thead>
                     <tr>
-                        <th>提交时间</th>
+                        <th>时间id</th>
                         <th>姓名</th>
                         <th>出差时间</th>
                         <th>出差地点</th>

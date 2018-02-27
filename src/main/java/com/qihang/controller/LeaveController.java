@@ -44,7 +44,7 @@ public class LeaveController {
 
          //num参数是区分请求(请假查询1 和  汇总表查询2)
          // 参数:权利标识,系id(中层用,高层查看所有的.高层统一为0,教师统一为-1),登录者id
-         PageHelper.startPage(pn, 5);
+         PageHelper.startPage(pn, 7);
          // startPage后面紧跟的这个查询就是一个分页查询
          List<Leave> leaves = leaveService.getAllLeave("1",-1,user.getId());  //!!!只需要userID为动态
          // 使用pageInfo包装查询后的结果，只需要将pageInfo交给页面就行了。
@@ -66,7 +66,7 @@ public class LeaveController {
          // 参数:权利标识,系id(中层用,高层查看所有的.高层统一为0,教师统一为-1),登录者id
          PageHelper.startPage(pn, 7);
          // startPage后面紧跟的这个查询就是一个分页查询
-         List<Leave> leaves = leaveService.getAllLeave(user.getPower(),Integer.valueOf(user.getSystem()),user.getId()); //!!这个地方  需要所有的动态
+         List<Leave> leaves = leaveService.getAllLeave(user.getPost(),Integer.valueOf(user.getSystem()),user.getId()); //!!这个地方  需要所有的动态
          // 使用pageInfo包装查询后的结果，只需要将pageInfo交给页面就行了。
          // 封装了详细的分页信息,包括有我们查询出来的数据，传入连续显示的页数7
          PageInfo pageInfo = new PageInfo(leaves, 7);
@@ -89,7 +89,7 @@ public class LeaveController {
          // 参数:权利标识,系id(中层用,高层查看所有的.高层统一为0,教师统一为-1),登录者id
          PageHelper.startPage(pn, 7);
          // startPage后面紧跟的这个查询就是一个分页查询
-         List<Leave> leaves = leaveService.getLeaveByLike(orApprove,systemId,name,user.getPower(),Integer.valueOf(user.getSystem()),user.getId()); //!!这个地方  需要所有的动态
+         List<Leave> leaves = leaveService.getLeaveByLike(orApprove,systemId,name,user.getPost(),Integer.valueOf(user.getSystem()),user.getId()); //!!这个地方  需要所有的动态
          // 使用pageInfo包装查询后的结果，只需要将pageInfo交给页面就行了。
          // 封装了详细的分页信息,包括有我们查询出来的数据，传入连续显示的页数7
          PageInfo pageInfo = new PageInfo(leaves, 7);
@@ -114,11 +114,11 @@ public class LeaveController {
 
          List<Leave> leaves = new ArrayList<Leave>();
          if (user!=null){
-             if (Integer.valueOf(user.getPower())==2 ||Integer.valueOf(user.getPower())==4)
+             if (Integer.valueOf(user.getPost())==2 ||Integer.valueOf(user.getPost())==4)
                  leaves = leaveService.getLeaveByUser(String.valueOf(user.getId()),0);
-             if (Integer.valueOf(user.getPower())==3)
+             if (Integer.valueOf(user.getPost())==3)
                  leaves = leaveService.getLeaveByUser(String.valueOf(user.getId()),1);
-             if (Integer.valueOf(user.getPower())==1)
+             if (Integer.valueOf(user.getPost())==1)
                  leaves = null;
 
          }
@@ -208,7 +208,7 @@ public class LeaveController {
         User user = (User) session.getAttribute(TableConstants.USER_SESSION);
 
         //需要三个参数:请假信息对应的id,是否批准对应的标识,中高层领导标识
-        int re = leaveService.approveLeave(leaveId,numId,user.getPower());
+        int re = leaveService.approveLeave(leaveId,numId,user.getPost());
         if (re!=0)
             return Msg.success();
         return Msg.fail();
