@@ -158,9 +158,6 @@
             dataType:"json",
             success:function(result){
                 var majors = result.jsondata.systems;
-                $("#systemId").append($("<option></option>").attr("value",0).text("不限"));
-                $("#system_add").append($("<option></option>").attr("value",0).text("所有院系"));
-                $("#system_change").append($("<option></option>").attr("value",0).text("所有院系"));
                 $.each(majors,function (index,item) {
                     $("#system_add").append($("<option></option>").attr("value",item.id).text(item.system));
                     $("#systemId").append($("<option></option>").attr("value",item.id).text(item.system));
@@ -168,8 +165,6 @@
                 });
             }
         });
-
-
     });
     function to_page(pn){
         $.ajax({
@@ -177,7 +172,6 @@
             data:{"pn":pn},
             type:"GET",
             success:function(result){
-                console.log(result);
                 //1、解析并显示数据
                 build_user_table(result);
                 //2、解析并显示分页信息
@@ -357,7 +351,7 @@
                 $("#message_add").html("系统出现错误!请稍后重试!");
             }
         })
-    })
+    });
 
     //修改用户模态框
     //点击修改弹出修改用户信息模态框
@@ -370,7 +364,7 @@
         $("#changeUser").modal({
             backdrop:"static"
         });
-    })
+    });
     function changeUser(changeId) {
         $.ajax({
             url:"getUserById",

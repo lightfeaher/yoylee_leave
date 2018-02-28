@@ -1,7 +1,6 @@
 package com.qihang.controller;
 
 import com.qihang.model.System;
-import com.qihang.model.User;
 import com.qihang.serviceImpl.SystemServiceImpl;
 import com.qihang.util.Msg;
 import org.springframework.beans.factory.annotation.Autowired;

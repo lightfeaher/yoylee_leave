@@ -7,9 +7,7 @@ import com.qihang.model.User2;
 import com.qihang.serviceImpl.UserServiceImpl;
 import com.qihang.util.Msg;
 import com.qihang.util.TableConstants;
-import javafx.scene.control.Tab;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.objenesis.instantiator.sun.MagicInstantiator;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,7 +15,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import sun.misc.BASE64Encoder;
 
-import javax.jws.WebParam;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
@@ -34,7 +31,7 @@ public class UserController {
     @RequestMapping(value = "/getAllUser")
     @ResponseBody
     public Msg getAllUser(
-            @RequestParam("pn") int pn
+            @RequestParam(value = "pn", defaultValue = "1") Integer pn
     ){
         PageHelper.startPage(pn, 7);
         List<User2> users = userService.selectAllUser();

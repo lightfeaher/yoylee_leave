@@ -1,7 +1,5 @@
 package com.qihang.dao.provider;
 
-import jdk.nashorn.internal.objects.annotations.Where;
-import org.apache.ibatis.javassist.runtime.Desc;
 import org.apache.ibatis.jdbc.SQL;
 
 import static com.qihang.util.TableConstants.TABLELEAVE;
@@ -14,13 +12,20 @@ public class LeaveDynaSqlProvider {
                 FROM(TABLELEAVE);
                 //教师(查询自己的请假记录)
                 if (powerId.equals("1")){
-                    WHERE(" u_id = "+userId);
+                    //判断是不是用作查询进度的
+                    if (sysId == -1){
+                        WHERE(" u_id = "+userId);
+                        ORDER_BY(" id desc");
+                    } else
+                        WHERE(" u_id = "+userId+" and (leader1 != 1 and leader2 != 1)");
                 }
                 //中层领导
                 if (powerId.equals("2")){
-                    WHERE(" u_sys = "+sysId);
+                    WHERE(" u_sys = "+sysId+" and (leader1 != 1 and leader2 != 1)");
                 }
-                ORDER_BY(" sub_time desc");
+                if(powerId.equals("3")||powerId.equals("4")){
+                    WHERE(" leader1 != 1 and leader2 != 1");
+                }
                 //高层领导和院办主任便是查询所有的
             }
         }.toString();
@@ -31,6 +36,7 @@ public class LeaveDynaSqlProvider {
             {
                 SELECT("*");
                 FROM(TABLELEAVE);
+                WHERE(" leader1 != 1 and leader2 != 1");
                 //教师(查询自己的请假记录)
                 if (powerId.equals("1")){
                     WHERE(" u_id = "+userId);
@@ -71,8 +77,6 @@ public class LeaveDynaSqlProvider {
                         WHERE(" u_sys = "+systemId);
                     }
                 }
-
-                ORDER_BY(" sub_time desc");
             }
         }.toString();
         return sql;
@@ -99,9 +103,9 @@ public class LeaveDynaSqlProvider {
               if (powerId.equals("2")||powerId.equals("4")){
                   //批准
                   if (numId == 1)
-                    SET("leader1 = 2");
+                    SET("leader1 = 2 ");
                   else //未批准
-                      SET("leader1 = 3");
+                      SET("leader1 = 3,leader2 = 3 ");
               }
               //高层领导
               if (powerId.equals("3")){

@@ -32,7 +32,7 @@
                 <table class="table table-bordered table-hover" id="leaveTable" style="padding: 0 0 0 0">
                     <thead>
                     <tr>
-                        <th>时间id</th>
+                        <th>id</th>
                         <th>姓名</th>
                         <th>出差时间</th>
                         <th>出差地点</th>
@@ -44,18 +44,6 @@
                     </thead>
 
                     <tbody>
-                    <c:forEach var="leave" items="${requestScope.leaves}">
-                        <tr>
-                            <td>${leave.subTime}</td>
-                            <td>${leave.uTname}</td>
-                            <td>${leave.leaveTime}</td>
-                            <td>${leave.place}</td>
-                            <td>${leave.phone}</td>
-                            <td>${leave.reason}</td>
-                            <td style="color: red"><b>${(leave.leader1) == 1?"处理中":(leave.leader1 == 2 ? "已批准":"未批准") }</b></td>
-                            <td style="color: red"><b>${(leave.leader2) == 1?"处理中":(leave.leader2 == 2 ? "已批准":"未批准") }</b></td>
-                        </tr>
-                    </c:forEach>
                     </tbody>
                 </table>
          <%--   </div>
@@ -99,7 +87,7 @@
         $("#leaveTable tbody").empty();
         var leaves = result.jsondata.pageInfo.list;
         $.each(leaves,function(index,item){
-            var subTime = $("<td></td>").append(item.subTime);
+            var subTime = $("<td></td>").append(item.id);
             var uTname = $("<td></td>").append(item.uTname);
             var leaveTime = $("<td></td>").append(item.leaveTime);
             var place = $("<td></td>").append(item.place);

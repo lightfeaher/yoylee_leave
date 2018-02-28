@@ -163,7 +163,6 @@
             dataType:"json",
             success:function(result){
                 var majors = result.jsondata.systems;
-                $("#systemId").append($("<option></option>").attr("value",0).text("不限"));
                 $.each(majors,function (index,item) {
                     $("#systemId").append($("<option></option>").attr("value",item.id).text(item.system));
                 });
@@ -176,7 +175,6 @@
             data:{"pn":pn},
             type:"GET",
             success:function(result){
-                console.log(result);
                 //1、解析并显示毕业数据
                 build_leave_table(result);
                 //2、解析并显示分页信息

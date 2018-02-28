@@ -3,7 +3,6 @@ package com.qihang.serviceImpl;
 import com.qihang.dao.SystemDao;
 import com.qihang.model.System;
 import com.qihang.service.SystemService;
-import com.qihang.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
