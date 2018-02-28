@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="war" name="Dkxy_qj:war">
-    <output-path>$PROJECT_DIR$/target</output-path>
-    <root id="archive" name="Dkxy_qj.war">
-      <element id="artifact" artifact-name="Dkxy_qj:war exploded" />
-    </root>
-  </artifact>
-</component>

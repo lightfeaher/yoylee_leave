@@ -33,8 +33,8 @@
         <tr>
             <td></td>
             <td class="login_button" colspan="3">
-                <input type="button" style="cursor:pointer;" id="btn-sub" value=" 登 录 "  class="button3" >
-                <input type="reset" style="cursor:pointer;" value=" 清 空 " class="button3">
+                <button  style="cursor:pointer;" id="btn-sub"  class="button3" >登录</button>
+                <button type="reset" style="cursor:pointer;" class="button3">清空</button>
             </td>
             <td><span class="required"></span></td>
         </tr>
@@ -57,7 +57,7 @@
     }
     $("#btn-sub").click(function () {
         if (checkForm()){
-            $(".button3").attr({"disabled": "disabled"}).val("登录中..");
+            $(".button3").attr({"disabled": "disabled"}).html("登录中..");
             var name = $("#name").val();
             var pass = $("#pass").val();
             $.ajax({
