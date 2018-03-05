@@ -18,6 +18,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -128,8 +130,8 @@ public class LeaveController {
      @ResponseBody
      public Msg getSingleLeave(
              @PathVariable("id") int id
-     ){
-        LeaveDetail leave = leaveService.getSingleLeave(id);
+     ) throws ParseException {
+         LeaveDetail leave = leaveService.getSingleLeave(id);
          return Msg.success().add("singleLeave",leave);
      }
     /*增*/
@@ -149,7 +151,9 @@ public class LeaveController {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute(TableConstants.USER_SESSION);
 
-        Date sqlDate = new java.sql.Date(new Date().getTime());
+        //组合请假日期
+
+        java.sql.Date sqlDate = new java.sql.Date(new Date().getTime());
         //下面的等到session中赋值
         leave.setuId(user.getId());
         leave.setuSys(Integer.valueOf(user.getSystem()));

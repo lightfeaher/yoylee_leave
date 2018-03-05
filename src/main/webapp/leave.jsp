@@ -25,19 +25,20 @@
         </div>
         <div class="panel-body" style="padding: 0px 0px 0px 30px">
             <p><h4><b>注意:</b>请正确填写相关信息!提交的请假信息可在未批准时进行撤销!</h4></p>
-            <p><span class="span-sty">*出差时间格式: 2017.3.20-2017.11.5</span></p>
+            <p><span class="span-sty">*出差时间格式: 2017/3/20--2017/11/5</span></p>
         </div>
         <div class="panel-body" style="padding: 10px 200px 10px 200px">
             <div>
                 <form id="huamingcefrom" method="post" class="form-horizontal">
                     <div class="form-group">
                         <label class="input_wh">姓名：</label>
-                        <input type="text"  class="input_wh2"  name="uTname" id="name" value="${sessionScope.user.name}">
+                        <input type="text"  class="input_wh2"  name="uTname" id="name" value="${sessionScope.user.name}" readonly>
                         <span class="span-sty">*必填</span>
                     </div>
                     <div class="form-group">
                         <label class="input_wh">出差时间：</label>
-                        <input type="text"  class="input_wh2"  name="leaveTime" id="leaveTime">
+                        <input type="text"  class="input_wh3" id="year1">/<input type="text" class="input_wh3" id="mouth1">/<input type="text" class="input_wh3" id="day1">--<input type="text" class="input_wh3" id="year2">/<input type="text" class="input_wh3" id="mouth2">/<input type="text" class="input_wh3" id="day2">
+                        <input type="text"  class="input_wh3" name="leaveTime" id="leaveTime" style="display: none">
                         <span class="span-sty">*必填</span>
                     </div>
                     <div class="form-group">
@@ -108,16 +109,11 @@
     })
     function checkForm(){
         var name = document.getElementById("name").value;
-        var leaveTime = document.getElementById("leaveTime").value;
         var place = document.getElementById("place").value;
         var reason = document.getElementById("reason").value;
         var phone = document.getElementById("phone").value;
         if (name.replace(/^ +| +$/g, '') === "") {
             alert("姓名不能为空！");
-            return false;
-        }
-        else if (leaveTime.replace(/^ +| +$/g, '') === "") {
-            alert("出差时间不能为空！");
             return false;
         }
         else if (place.replace(/^ +| +$/g, '') === "") {
@@ -136,6 +132,14 @@
     }
     function subForm() {
         if (checkForm()) {
+            var year1 = $("#year1").val();
+            var mouth1 = $("#mouth1").val();
+            var day1 = $("#day1").val();
+            var year2 = $("#year2").val();
+            var mouth2 = $("#mouth2").val();
+            var day2 = $("#day2").val();
+            var leaveTime = year1+"."+mouth1+"."+day1+"-"+year2+"."+mouth2+"."+day2;
+            $("#leaveTime").val(leaveTime);
             $(".btn").attr({"disabled": "disabled"}).html("提交中..");
             $.ajax({
                 url: "addLeave",

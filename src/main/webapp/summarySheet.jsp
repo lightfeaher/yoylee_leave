@@ -88,6 +88,12 @@
                             <span id="leader2"></span>
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label class="input_wh">提交时间:</label>
+                        <div class="col-sm-5">
+                            <span id="subTime"></span>
+                        </div>
+                    </div>
                 </form>
             </div>
             <div class="modal-footer">
@@ -329,6 +335,7 @@
                 $("#ulname2").html(leave.user2.name);
                 $("#leader1").html(leave.leader1 == 2?"已批准":"未批准");
                 $("#leader2").html(leave.leader2 == 2?"已批准":"未批准");
+                $("#subTime").html(leave.subTime);
             }
         })
     }

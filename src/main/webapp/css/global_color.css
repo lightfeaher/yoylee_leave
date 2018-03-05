@@ -239,7 +239,7 @@ body.index
     background-image: url(../image/bg2.jpg);
     background-position: center top;
     background-repeat: no-repeat;
-    background-size: cover ;
+    background-size: 100% ;
 }
 
 #index_navi

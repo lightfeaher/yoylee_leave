@@ -1,6 +1,7 @@
 package com.qihang.model;
 
-import java.util.Date;
+
+import java.sql.Date;
 
 public class LeaveDetail {
     private int id;
