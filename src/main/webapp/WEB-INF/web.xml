@@ -13,6 +13,13 @@
     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
   </listener>
 
+  <!--配置定时备份数据库的监听器-->
+  <listener>
+    <listener-class>
+      com.qihang.controller.databaseBackUpRecover.OperationListener
+    </listener-class>
+  </listener>
+
   <!--2、springmvc的前端控制器，拦截所有请求  -->
   <servlet>
     <servlet-name>dispatcherServlet</servlet-name>

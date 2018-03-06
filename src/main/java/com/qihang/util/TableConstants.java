@@ -1,5 +1,7 @@
 package com.qihang.util;
 
+import java.util.Date;
+
 public class TableConstants {
     // 数据库表常量
     public static final String TABLEUSER = "tab_user";
@@ -10,4 +12,6 @@ public class TableConstants {
 
     // 用户的session对象
     public static final String USER_SESSION = "user";
+
+    public static String sqlNum = "";
 }
