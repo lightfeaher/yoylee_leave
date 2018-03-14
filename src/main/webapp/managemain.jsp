@@ -7,7 +7,6 @@
 
     <link type="text/css"  rel="stylesheet" href="css/main.css">
     <script src="http://cdn.bootcss.com/jquery/1.9.0/jquery.min.js"></script>
-    <%--<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>--%>
     <script type="text/javascript" src="js/main.js"></script>
     <title>动科请假系统首页</title>
 </head>
