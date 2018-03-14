@@ -6,7 +6,6 @@ import java.util.Map;
 /**
  * 通用的返回的类
  *
- * @author lfy
  */
 public class Msg {
     //状态码   100-失败/没有内容    200-成功/有内容

@@ -29,8 +29,10 @@ public interface UserDao {
 
     @Select(value = "select * from "+TABLEUSER+" where name = #{name} and password = #{pass}")
     User testUser(@Param("name") String name,@Param("pass") String pass);
+
     @Select(value = "select name,post,system from "+ TABLEUSER+" where id = #{id}")
     User selectUserById(@Param("id") int id);
+
     @Select(value = "select name from "+ TABLEUSER+" where id = #{id}")
     User2 selectUserById2(@Param("id") int id);
 
@@ -51,8 +53,10 @@ public interface UserDao {
     /*改*/
     @Update(value = "update "+TABLEUSER+" set password = #{pass} where id = #{id}")
     int updatePassword(@Param("pass") String pass,@Param("id") int id);
+
     @Update(value = "update "+TABLEUSER+" set password = #{pass} where name = #{name}")
     int resetPassword(@Param("pass") String pass,@Param("name") String name);
+
     @Update(value = "update "+TABLEUSER+" set name = #{user.name},post = #{user.post},system = #{user.system} where id = #{user.id}")
     int updateUser(@Param("user") User user);
 

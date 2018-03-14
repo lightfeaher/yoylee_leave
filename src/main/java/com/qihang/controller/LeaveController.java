@@ -19,7 +19,6 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -51,6 +50,7 @@ public class LeaveController {
          PageInfo pageInfo = new PageInfo(leaves, 7);
          return Msg.success().add("pageInfo",pageInfo);
      }
+
      @RequestMapping(value = "/getAllLeave")
      @ResponseBody
      public Msg getAllLeave(
@@ -71,6 +71,7 @@ public class LeaveController {
          PageInfo pageInfo = new PageInfo(leaves, 7);
          return Msg.success().add("pageInfo",pageInfo);
      }
+
      @RequestMapping(value = "/getLeaveByLike")
      @ResponseBody
      public Msg getLeaveByLike(
@@ -95,12 +96,6 @@ public class LeaveController {
          return Msg.success().add("pageInfo",pageInfo);
      }
 
-//     @RequestMapping(value = "/getQueryLeave")
-//     public ModelAndView getQueryLeave(
-//             ModelAndView mv
-//     ){
-//         List<Leave> leaves = leaveService
-//     }
 
      @RequestMapping(value = "/getLeaveByUser")
      public ModelAndView getLeaveByUser(
@@ -167,6 +162,7 @@ public class LeaveController {
         }else
             return Msg.fail();
     }
+
     @RequestMapping(value = "/getPrivateLeave")
     public ModelAndView getPrivateLeave(
             ModelAndView mv,

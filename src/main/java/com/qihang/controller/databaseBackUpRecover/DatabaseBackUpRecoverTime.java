@@ -46,8 +46,11 @@ public class DatabaseBackUpRecoverTime {
             }
             outStr = sb.toString();
             // 要用来做导入用的sql目标文件：
+
+            //组合导出的文件名添加备份日期,防止相互覆盖
             Date date = new Date();
             SimpleDateFormat f = new SimpleDateFormat("MM-dd");
+            //sqlNum为一个自定义工具类中的static类型的Date变量,自己设置即可
             sqlNum = f.format(date);
             path = path.split("-")[0]+"-"+sqlNum+".sql";
             FileOutputStream fout = new FileOutputStream(path);

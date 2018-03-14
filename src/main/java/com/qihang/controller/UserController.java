@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import sun.misc.BASE64Encoder;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
@@ -128,6 +130,7 @@ public class UserController {
             return msg;
         }
     }
+
     @RequestMapping(value = "/resetPassword")
     @ResponseBody
     public Msg resetPassword(
@@ -181,6 +184,7 @@ public class UserController {
         }
         return Msg.success().add("users",users);
     }
+
     @RequestMapping(value = "/getGaoUser")
     @ResponseBody
     public Msg getGaoUser(
@@ -192,7 +196,8 @@ public class UserController {
     @RequestMapping(value = "/clearSession")
     public ModelAndView clearSession(
             ModelAndView mv,
-            HttpServletRequest request
+            HttpServletRequest request,
+            HttpServletResponse response
     ){
         //获取session
         HttpSession session = request.getSession();
@@ -200,6 +205,18 @@ public class UserController {
         session.removeAttribute("user");
         //销毁该session:清除保存内容与sessionid
         session.invalidate();
+        //清除所有Cookie
+        Cookie cookies[] = request.getCookies();//获得所有Cookie
+        if (cookies != null)
+        {
+            for (int i = 0; i < cookies.length; i++)
+            {
+                Cookie cookie = new Cookie(cookies[i].getName(),null);
+                cookie.setPath("/");//设置成跟写入cookies一样的
+                cookie.setMaxAge(0);
+                response.addCookie(cookie);
+            }
+        }
         mv.setViewName("index");
         return mv;
     }

@@ -21,7 +21,7 @@
             <span id="logout" style="color: red;cursor:pointer">注销用户</span>
         </div>
         <div class="top2">
-            <b>权限:</b><span>${sessionScope.user.post == 1?"教师":(sessionScope.user.post==2?"中级领导":(sessionScope.user.post==3?"高级领导":"院办主任"))}</span>
+            <b>权限:</b><span>${sessionScope.user.post == 1?"教师":(sessionScope.user.post==2?"中级领导":(sessionScope.user.post==3?"高级领导":(sessionScope.user.post==4?"院办主任":"无权限")))}</span>
         </div>
         <div class="top2">
             <b>用户名:</b><span>${sessionScope.user.name}</span>

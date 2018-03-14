@@ -1,7 +1,5 @@
 package com.qihang.controller.databaseBackUpRecover;
 
-import org.apache.tools.ant.taskdefs.Get;
-
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.Date;
@@ -20,6 +18,7 @@ public class TimerManager {
         //获取并处理配置文件中的时间
         /**备份的确切时间*/
         String backuptime=GetProperties.getBackuptime();
+
         String[] time=backuptime.split(":");
         int hours=Integer.parseInt(time[0]);
         int minute=Integer.parseInt(time[1]);

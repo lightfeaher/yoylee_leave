@@ -14,15 +14,11 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 
 /**
- * 备份与还原数据库
+ * 非定时备份与还原数据库  未使用
  */
 
 @Controller
 public class DatabaseBackUpRecover {
-//    public static void main(String[] args) throws IOException{
-//        backup("d:\\d.sql");
-//        //recover("d:\\d.sql");
-//    }
 
     @RequestMapping(value = "/backupDatabase")
     public void backupDatabase() throws IOException {

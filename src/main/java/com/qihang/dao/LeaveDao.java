@@ -20,8 +20,6 @@ public interface LeaveDao {
     @SelectProvider(type = LeaveDynaSqlProvider.class,method = "selectLeaveByUser")
     List<Leave> selectLeaveByUser(String name,int num);
 
-//    @Select(value = "select * from "+TABLELEAVE+" where ")
-
     @Select(value = "select * from "+TABLELEAVE+" where u_id = #{uId} and ((leader1 = 1 and leader2 = 1) or (leader1 = 2 and leader2 = 1))")
     List<Leave> selectPrivateLeave(int uId);
 
